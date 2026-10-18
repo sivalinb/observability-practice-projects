@@ -17,7 +17,7 @@ python -m unittest discover -s tests -p 'test_07*.py' -v
 
 `artifacts/07/latest.json` identifies the latest run directory. That directory contains `cost-and-diagnosis.json`, five compressed telemetry representations, and the independent unsampled metrics required by the incident-aware policy. The evidence viewer and shared Grafana dashboard show checks from the actual run. The screenshot is a captured execution report, not a substitute for the raw evidence.
 
-## The principal engineer thought process
+## Design reasoning
 
 Start by asking what decision the telemetry supports. A cheap representation is unacceptable if it removes the only observation of a rare customer failure. Conversely, retaining every debug string forever is unnecessary when counters and compatible latency buckets answer the operational question.
 
@@ -76,10 +76,10 @@ Python performs the transformations and evaluation. In the full repository, Open
 
 This offline transformation uses immutable fixture input and writes derived artifacts. A second WAL inside a pure replayable transformation would add complexity without protecting a unique input. In a streaming deployment, put the durability boundary before any irreversible drop: Fluent Bit cursor WAL plus filesystem payload buffering, OpenTelemetry persistent queue, and optionally Kafka for retained replay and separate consumers. Kafka is useful when multiple policies must consume the same durable source; it is unnecessary for this bounded local replay. A Kafka acknowledgment also does not guarantee downstream retention of an exemplar.
 
-## Rollout and interview narrative
+## Rollout and walkthrough
 
 Shadow the proposed reduction alongside the existing path. Replay historical incident questions and an explicit rare-event set. Set separate acceptance limits for byte reduction, missed diagnoses, temporal resolution and investigative detail. Deploy per tenant or service behind a rollback switch. Keep raw data briefly so the first rollout can be reversed; after retention expires, deleted detail cannot be recreated by a rollback.
 
-In an interview, explain the ordering: define the question, establish ground truth, compare representations, catch a misleading quantile, account for all retained signals, and make the loss explicit. The engineering decision is not “sample 90%.” It is “keep unbiased operational aggregates and choose which detailed questions justify retained events.”
+**Walkthrough.** Explain the ordering: define the question, establish ground truth, compare representations, catch a misleading quantile, account for all retained signals, and make the loss explicit. The engineering decision is not “sample 90%.” It is “keep unbiased operational aggregates and choose which detailed questions justify retained events.”
 
 Limitations: the fixture is small, detector rules are intentionally simple, the pricing model excludes much of a real platform bill, and gzip ratios depend on content. Bucket layouts must match before merging; the code demonstrates compatible layouts, not a schema migration across incompatible histograms.

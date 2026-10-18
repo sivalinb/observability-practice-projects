@@ -40,7 +40,7 @@ python run.py --project 09
 
 That makes an actual streaming `/api/generate` call and saves the provider's model token counts and nanosecond timings alongside client-observed TTFT. No model comparison is reported unless the endpoint completed successfully. Ollama JSON chunks are transport events; the adapter does not pretend each chunk is exactly one tokenizer token.
 
-## The principal engineer thought process
+## Design reasoning
 
 First clarify the objective. A high token generation rate is not enough if requests spend seconds waiting before the first useful token. Ask for a latency objective at the expected prompt lengths, output lengths and concurrency. Then separate the waiting time from actual model work and network delivery.
 
@@ -57,7 +57,7 @@ The workload runs short and long prompts sequentially, then sends eight simultan
 
 The model uses smoothed trigram probabilities trained from `corpus.txt` and samples one word token at a time. Context processing computes actual context log likelihood; generation repeatedly scores the finite vocabulary. Repeated scoring is an explicit CPU workload amplifier so timing is measurable, not a hidden sleep or a claim to simulate a neural decoder. Seeds reproduce token sequences, while timing varies.
 
-Python's GIL limits parallel CPU execution in these threads. Two active workers demonstrate resource contention and queue instrumentation, not two cores of inference capacity. A process pool, native inference runtime or GPU scheduler would have different scaling. This distinction is part of the interview discussion, not an implementation footnote.
+Python's GIL limits parallel CPU execution in these threads. Two active workers demonstrate resource contention and queue instrumentation, not two cores of inference capacity. A process pool, native inference runtime or GPU scheduler would have different scaling. This distinction matters when interpreting the measured scaling behavior.
 
 ## Observability and capacity choices
 
@@ -91,10 +91,10 @@ Do not insert Kafka or a WAL between individual output tokens just to use a comp
 
 If asynchronous batch inference needs recoverable jobs, persist the accepted job before acknowledging it and use a durable worker queue such as Kafka where partitioning and replay are justified. Carry a request ID for idempotency because an accepted job may be retried. Persist completion independently from token delivery. The repository's Fluent Bit and collector queues protect telemetry; they do not turn an interrupted client stream into a completed inference response.
 
-## Rollout and interview narrative
+## Rollout and walkthrough
 
 Start with a controlled workload matrix of prompt length, output length and concurrency. Warm the model separately from steady-state measurements, repeat runs and compare distributions rather than one mean. Establish queue/TTFT/TPOT budgets, then load until the objectives fail. Report useful completed tokens and rejection rate alongside utilization. For a neural model, add batch sizes, KV-cache pressure, model placement, device memory and GPU saturation; the CPU trigram result cannot establish any of those properties.
 
-In an interview, use the eight-client burst to explain why a service can report fast token generation yet poor response time. Show a request's queue, prefill and decode spans, compare its client timing, and state exactly which measurements require a real GPU deployment.
+**Walkthrough.** Use the eight-client burst to explain why a service can report fast token generation yet poor response time. Show a request's queue, prefill and decode spans, compare its client timing, and state exactly which measurements require a real GPU deployment.
 
 Limitations: the small corpus yields unhelpful language, word tokens differ from LLM tokenizer tokens, vocabulary scoring is CPU-bound and intentionally repeated, the HTTP protocol is NDJSON rather than a production inference API, timing lacks statistical power for capacity planning, and the default run makes no claim about neural accuracy, GPU utilization or production throughput.

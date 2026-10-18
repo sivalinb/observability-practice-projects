@@ -28,7 +28,7 @@ def run_project(identifier):
 def build():
     choices = [(p.name[:2] + " · " + p.name[3:].replace("-", " ").title(), identifier) for identifier, p in projects().items()]
     with gr.Blocks(title="Observability Practice Projects", theme=gr.themes.Soft()) as app:
-        gr.Markdown("# Observability Practice Projects\nRun a real Python demonstration, inspect its measured results, and rehearse the architectural decisions. Each execution saves raw artifacts. No cloud API is used by default.")
+        gr.Markdown("# Observability Practice Projects\nRun a real Python demonstration, inspect its measured results, and explore the architectural decisions. Each execution saves raw artifacts. No cloud API is used by default.")
         with gr.Row():
             choice = gr.Dropdown(choices=choices, value="01", label="Choose a practice project")
             button = gr.Button("Run the project", variant="primary")

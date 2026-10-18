@@ -32,13 +32,13 @@ The Python evaluator uses exact bucket sums in `(now-window, now]`. Prometheus u
 
 The clock policy accepts sample ages from 0 through 120 seconds, inclusive. Future timestamps are invalid: Python excludes them, the Prometheus burn rule suppresses paging on them, and the telemetry rule raises a ticket. This deliberately strict demonstration allows zero positive clock skew. A production tolerance must be an explicit policy, tested at both boundaries, with clock synchronization monitored independently.
 
-## Thought process for a principal interview
+## Design reasoning
 
 Start with the customer promise: a 99.9% successful-operation objective over 30 days. Define the denominator and exclude neither errors nor outages merely because a component is unhealthy. In this example a batch operation, rather than a batch HTTP request, is the SLI event. A real product must explicitly choose its event semantics, latency cutoff, and retry treatment.
 
 The operational question is how much budget an incident may spend before someone should respond. Burn rate is `bad_fraction / (1 - SLO)`. Budget fraction consumed is `burn × window_hours / 720`. A burn of 14.4 over 1h consumes 2% of a 30-day budget; burn 6 over 6h consumes 5%. Pairing each long window with a short one improves reset behavior. The choice follows [Google's SRE alerting guidance](https://sre.google/workbook/alerting-on-slos/).
 
-I would defend the policy with detection, precision, reset time, and operator cost, rather than promise every blip produces a page. Before rolling it out, I would replay real incidents, ask which user journeys were harmed, and check whether low traffic makes one error disproportionately expensive. A synthetic journey can supplement sparse traffic, but it should remain a separate SLI.
+Evaluate the policy with detection, precision, reset time, and operator cost. Before rolling it out, replay real incidents, identify which user journeys were harmed, and check whether low traffic makes one error disproportionately expensive. A synthetic journey can supplement sparse traffic, but it should remain a separate SLI.
 
 ## Capacity and durability decisions
 
@@ -85,8 +85,8 @@ The supplied rule fixtures exercise sustained 2% errors, absent telemetry, and i
 
 The policy assumes accurate event counters and sufficiently synchronized event times. The evaluator does not implement Alertmanager deduplication, notification routing, maintenance silences, long-term SLO accounting, or production HA. Per-request latency SLOs need a distinct bad-event definition, not reuse of the availability numerator. The sample tokens and HTTP helpers are for local use.
 
-## Rollout and interview narrative
+## Rollout and walkthrough
 
 First publish recording rules and compare them with the existing alert stream. Review historic incidents and low-traffic services, then route initial alerts to a non-paging destination. Enable paging for one owner and one critical journey, watch time to detection and reset, and roll back routing if evidence quality fails. Keep freshness alerts owned by the telemetry platform and user-outcome pages owned by the service team.
 
-Tell the interview story as: **define a customer event → quantify acceptable budget spend → choose windows → reproduce failure and recovery → separate data loss from reliability → establish accountable rollout and rollback**. The strongest discussion is why a ten-minute recovery can still leave the slower pair firing, and what operating response that warrants.
+**Walkthrough.** Follow this sequence: **define a customer event → quantify acceptable budget spend → choose windows → reproduce failure and recovery → separate data loss from reliability → establish accountable rollout and rollback**. Explain why a ten-minute recovery can still leave the slower pair firing, and what operating response that warrants.

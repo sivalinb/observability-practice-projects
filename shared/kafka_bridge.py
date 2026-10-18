@@ -31,7 +31,7 @@ class DeliveryJournal:
 
 
 def push_loki(record, base_url):
-    payload = {"streams": [{"stream": {"job": "principal-prep", "source": "kafka", "project": str(record.get("project", "01"))},
+    payload = {"streams": [{"stream": {"job": "observability-practice", "source": "kafka", "project": str(record.get("project", "01"))},
                              "values": [[str(time.time_ns()), json.dumps(record, sort_keys=True)]]}]}
     request = Request(base_url.rstrip("/") + "/loki/api/v1/push", data=json.dumps(payload).encode(), headers={"Content-Type": "application/json"}, method="POST")
     with urlopen(request, timeout=5) as response:

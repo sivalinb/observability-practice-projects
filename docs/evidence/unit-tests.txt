@@ -63,6 +63,6 @@ test_failed_rerun_replaces_previous_green_evidence (test_shared.SharedEvidenceTe
 test_pinned_kafka_offset_includes_leader_epoch (test_shared.SharedEvidenceTests.test_pinned_kafka_offset_includes_leader_epoch) ... ok
 
 ----------------------------------------------------------------------
-Ran 63 tests in 7.157s
+Ran 63 tests in 7.136s
 
 OK

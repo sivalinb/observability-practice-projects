@@ -55,7 +55,7 @@ def query(expression):
 
 
 def loki_count(marker, source=None):
-    selector = '{job="principal-prep"' + (',source="' + source + '"' if source else '') + '} |= "' + marker + '"'
+    selector = '{job="observability-practice"' + (',source="' + source + '"' if source else '') + '} |= "' + marker + '"'
     result = get("http://localhost:13100/loki/api/v1/query_range", params={"query": selector, "limit": 1000, "start": str(time.time_ns() - 3600 * 10**9)}).json()["data"]["result"]
     identifiers = set()
     for stream in result:
@@ -69,7 +69,7 @@ def loki_count(marker, source=None):
 
 
 def append_logs(marker, count=5, kafka=False):
-    records = [{"event_id": f"{marker}-{i}", "project": "01", "service": "principal-prep", "scenario": marker,
+    records = [{"event_id": f"{marker}-{i}", "project": "01", "service": "observability-practice", "scenario": marker,
                 "sequence": i, "timestamp": time.time(), "passed": True} for i in range(count)]
     path = "/app/data/logs/" + ("kafka.jsonl" if kafka else "app.jsonl")
     code = "import os,json;from pathlib import Path;p=Path(" + repr(path) + ");p.parent.mkdir(parents=True,exist_ok=True);f=p.open('a');f.write(" + repr("".join(json.dumps(r) + "\n" for r in records)) + ");f.flush();os.fsync(f.fileno());f.close()"
@@ -131,7 +131,7 @@ def verify_base():
         expected_values = {key: float(value) for key, value in report["measurements"].items() if isinstance(value, (int, float)) and not isinstance(value, bool)}
         assert actual_values.keys() == expected_values.keys(), (identifier, actual_values, expected_values)
         assert all(actual_values[key] == value for key, value in expected_values.items()), identifier
-        log_query = '{job="principal-prep",project="' + identifier + '"} |= "' + report["run_id"] + '"'
+        log_query = '{job="observability-practice",project="' + identifier + '"} |= "' + report["run_id"] + '"'
         logs = get("http://localhost:13000/api/datasources/proxy/uid/loki/loki/api/v1/query_range", params={"query": log_query, "limit": 1000, "start": str(time.time_ns() - 3600*10**9)}).json()["data"]["result"]
         logged_scenarios = {json.loads(line).get("scenario") for stream in logs for _, line in stream["values"]}
         assert {check["name"] for check in report["checks"]}.issubset(logged_scenarios), identifier

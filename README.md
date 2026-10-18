@@ -6,7 +6,7 @@ Ten hands-on Python projects for understanding how observability behaves during 
 
 ![Interactive Gradio execution with actual recovery measurements](docs/assets/gradio.jpg)
 
-Each project includes working code, an illustrated architecture story, a screenshot of its actual execution, scenario checks, capacity calculations, and a README explaining the architectural thought process. The deeper decision records also support Principal Engineer interview practice.
+Each project includes working code, an illustrated architecture story, a screenshot of its actual execution, scenario checks, capacity calculations, and a README explaining the architectural thought process. The decision records explain the design tradeoffs and operational boundaries.
 
 ## Choose a project
 

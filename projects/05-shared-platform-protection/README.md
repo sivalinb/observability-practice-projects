@@ -30,13 +30,13 @@ The alpha fixture has burst capacity eight, concurrency two, and weight two; bet
 
 The sample `demo-alpha-token`, `demo-beta-token`, and `demo-gamma-token` values are public local fixtures, not secrets or production authentication. Replace them with verified identity claims from an identity provider before a network deployment.
 
-## Thought process for a principal interview
+## Design reasoning
 
 Start by naming the unit of isolation. Here it is the authenticated tenant, not a caller-supplied header, an IP address, or an individual request. Then identify the scarce resources: pending request memory, active worker slots, query CPU time, and storage I/O. A request-count quota alone cannot protect against one expensive query; a concurrency cap alone cannot bound the queue.
 
 I chose per-tenant queues because a global FIFO lets the noisy tenant occupy every waiting position. Weighted round robin expresses a service-share policy and permits unused capacity to be borrowed. The guarantee is a ratio of dispatch opportunities while tenants are backlogged and runnable. It is **not** a ratio of CPU time or bytes scanned; variable query costs require deficit scheduling, resource budgets, cancellation, and query-engine enforcement.
 
-The gateway deliberately bounds query bytes and a fixture work duration rather than pretending to estimate arbitrary SQL cost. The principal-level decision is where a policy becomes enforceable: trusted identity at ingress, admission before expensive work, and runtime cancellation inside the query engine. I would ask which tenants may borrow capacity, how the business sells guaranteed capacity, and how an overloaded control plane remains operable.
+The gateway deliberately bounds query bytes and a fixture work duration rather than pretending to estimate arbitrary SQL cost. The design decision is where a policy becomes enforceable: trusted identity at ingress, admission before expensive work, and runtime cancellation inside the query engine. Decide which tenants may borrow capacity, how the business sells guaranteed capacity, and how an overloaded control plane remains operable.
 
 ## Capacity math and alternatives
 
@@ -73,4 +73,4 @@ The quotas and queue state live in one process. Replicating the gateway multipli
 
 Begin with admission in shadow mode and compare requested costs, actual execution time, and the effect on healthy tenants. Introduce per-tenant connection limits, quotas, and queue caps before enforcing differentiated weights. Canary one tenant, publish overload responses and retry guidance, reserve control-plane capacity, and record rejected traffic by reason. Roll back policy values independently from the authentication boundary.
 
-Tell the interview story as: **identify a trusted tenant → enumerate scarce resources → choose measurable admission controls → demonstrate noisy-neighbor isolation → state the fairness unit → discuss replica coordination and business guarantees**. A principal answer explains why 2:1 dispatch does not establish 2:1 CPU fairness.
+**Walkthrough.** Follow this sequence: **identify a trusted tenant → enumerate scarce resources → choose measurable admission controls → demonstrate noisy-neighbor isolation → state the fairness unit → discuss replica coordination and business guarantees**. Explain why 2:1 dispatch does not establish 2:1 CPU fairness.

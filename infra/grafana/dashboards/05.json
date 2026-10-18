@@ -274,7 +274,7 @@
       "targets": [
         {
           "refId": "A",
-          "expr": "{job=\"principal-prep\",project=\"05\"} | json | run_id != \"\"",
+          "expr": "{job=\"observability-practice\",project=\"05\"} | json | run_id != \"\"",
           "instant": false,
           "legendFormat": "{{project}}"
         }

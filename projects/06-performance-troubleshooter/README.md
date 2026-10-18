@@ -36,9 +36,9 @@ Request five waits forty milliseconds in its dependency. Request seven returns a
 
 The head comparison retains trace IDs divisible by four: a deterministic 25% fixture decision made without outcome knowledge. The tail comparison retains completed traces containing an error or a frontend duration of at least 25ms. The rare-error and deliberately slow trace IDs are chosen outside the head set to illustrate a missed incident. This deterministic fixture is not an unbiased statistical measurement of a production sampler's error recall.
 
-## Thought process for a principal interview
+## Design reasoning
 
-Start with the question an operator is trying to answer. A slow parent request may be waiting on a dependency, spending CPU locally, queueing, or suffering a scheduling delay. Trace spans locate time in the request path. A profile attributes execution within the Python process. I would avoid adding more span names before asking which uncertainty each instrument resolves.
+Start with the question an operator is trying to answer. A slow parent request may be waiting on a dependency, spending CPU locally, queueing, or suffering a scheduling delay. Trace spans locate time in the request path. A profile attributes execution within the Python process. Before adding more span names, ask which uncertainty each instrument resolves.
 
 The design keeps distributed identity, trace retention, and profiling separate. A correct trace ID is necessary for causal navigation, but retention determines whether that evidence remains available. Head sampling can reject work early and reduce overhead; tail sampling can use observed latency and errors but needs upstream spans, routing affinity, memory, and a deadline. [OpenTelemetry's sampling documentation](https://opentelemetry.io/docs/concepts/sampling/) explains these distinct decision points.
 
@@ -56,7 +56,7 @@ The overhead experiment alternates baseline and traced order across seven rounds
 
 ## WAL and Kafka decisions
 
-The SDK's in-process span buffer is not a WAL. A process crash before export can lose spans. The shared Collector's file-backed exporter queue protects accepted export work; it does not durably preserve a tail sampler's in-flight trace assembly. Fluent Bit separately persists scenario logs as filesystem chunks and tracks its tail offset. These storage boundaries should appear explicitly in an interview failure analysis.
+The SDK's in-process span buffer is not a WAL. A process crash before export can lose spans. The shared Collector's file-backed exporter queue protects accepted export work; it does not durably preserve a tail sampler's in-flight trace assembly. Fluent Bit separately persists scenario logs as filesystem chunks and tracks its tail offset. Make these storage boundaries explicit when analyzing failures.
 
 A custom WAL for every diagnostic span would add sync cost and privacy obligations without automatically recovering a complete distributed trace. Kafka becomes useful when replay and independent durable consumers are actual requirements. Partition by trace ID when one consumer must assemble a complete trace, account for rebalance and late arrivals, and state the retention window. Kafka is optional here because a local sampling comparison and shared Collector persistence meet the learning objective.
 
@@ -74,8 +74,8 @@ A custom WAL for every diagnostic span would add sync cost and privacy obligatio
 
 The implementation does not test network partitions in the trace backend, distributed tail-shard failover, missing-span reconstruction, continuous profiling, or GPU profiling. Project 01 covers durable telemetry failure/recovery. Fixed trace IDs are public fixtures for reproducibility and should never be used as real production ID generation.
 
-## Rollout and interview narrative
+## Rollout and walkthrough
 
 Instrument one critical request path and verify cross-process parentage before scaling instrumentation. Establish baseline latency, CPU, and allocation costs at several traffic levels. Begin with deterministic sampling and compare retained incident evidence offline. Add latency/error retention only after sizing the assembly buffer and testing late spans, overflow, and shard movement. Keep a rollback path that reduces span volume without breaking propagation.
 
-Tell the interview story as: **form a latency hypothesis → follow the request → distinguish waiting from CPU work → measure instrumentation cost → evaluate retention bias → size and protect the evidence pipeline**. A principal answer identifies what a complete trace still cannot explain and chooses the next measurement accordingly.
+**Walkthrough.** Follow this sequence: **form a latency hypothesis → follow the request → distinguish waiting from CPU work → measure instrumentation cost → evaluate retention bias → size and protect the evidence pipeline**. Identify what a complete trace still cannot explain and choose the next measurement accordingly.

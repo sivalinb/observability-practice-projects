@@ -1,4 +1,4 @@
-name: principal-observability
+name: observability-practice-projects
 services:
   prep:
     build: .

@@ -1,5 +1,5 @@
 {
-  "executed_at": "2026-10-18T22:26:42.934812+00:00",
+  "executed_at": "2026-10-18T23:30:53.409230+00:00",
   "checks": [
     {
       "name": "All ten Python project demos",
@@ -59,7 +59,7 @@
     {
       "name": "Fluent Bit to Kafka and consumer outage replay",
       "passed": true,
-      "detail": "Five records retained while consumer stopped; Loki received them after restart; committed offset 15 >= 15"
+      "detail": "Five records retained while consumer stopped; Loki received them after restart; committed offset 5 >= 5"
     }
   ]
 }

@@ -251,7 +251,7 @@
       "targets": [
         {
           "refId": "A",
-          "expr": "{job=\"principal-prep\"}",
+          "expr": "{job=\"observability-practice\"}",
           "instant": false,
           "legendFormat": "{{project}}"
         }

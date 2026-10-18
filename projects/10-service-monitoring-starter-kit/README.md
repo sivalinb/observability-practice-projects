@@ -30,7 +30,7 @@ python app.py 2>service.jsonl
 
 In another terminal, call `/health`, `/work`, `/work?fail=1` and `/metrics` on port 8080. `SERVICE_PORT`, `SERVICE_HOST` and `SERVICE_TRACE_FILE` configure deployment; the default bind is loopback. Docker sets the bind to `0.0.0.0`. To send spans to the shared collector, set `OTEL_EXPORTER_OTLP_ENDPOINT=http://127.0.0.1:4318` for a host process, or the appropriate Compose service URL inside a container. This uses the real OTLP HTTP exporter, not a generated tracing stub.
 
-## The principal engineer thought process
+## Design reasoning
 
 Start with the friction in onboarding a service: teams can copy an HTTP example, but ownership, signal conventions, dashboards, collection and error behavior often arrive separately. A useful platform template makes the operational contract concrete and testable while keeping the inputs small.
 
@@ -89,12 +89,12 @@ Application trace JSONL is a local verification sink. It does not claim crash-co
 
 The end-to-end run starts and stops the generated service automatically. It does not leave a background service behind. The manual `app.py` command keeps the generated service running until you stop it.
 
-## Rollout and interview narrative
+## Rollout and walkthrough
 
 Treat the starter as a small platform product. Measure time to the first useful dashboard, percentage of services with real owners, invalid contracts caught before deployment, and drift after onboarding. Pilot with one team, capture the first failure case and upgrade the generator with a versioned migration. Enforce low-friction required metadata first; add policies when their operational cost is understood.
 
 Alternatives include a large framework, copy-and-paste documentation, or a central sidecar that adds every signal. A framework can constrain service choices; documentation drifts; a sidecar cannot infer business ownership or internal spans. This generator supplies a thin executable contract and lets the shared collection stack handle transport. Its main trade-off is ownership of generated code and future migrations.
 
-In an interview, follow a service from owner contract to first failing request. Show the rejected cardinality mistake, the exact trace-context assertion, and the target-aware histogram test. Explain why template adoption, operational consistency and upgrade safety matter as much as generating files.
+**Walkthrough.** Follow a service from owner contract to first failing request. Show the rejected cardinality mistake, the exact trace-context assertion, and the target-aware histogram test. Explain why template adoption, operational consistency and upgrade safety matter as much as generating files.
 
 Limitations: this is a small stdlib HTTP server rather than a production application framework; it has no authentication, TLS, autoscaling or application-specific SLO; labels are intentionally fixed; generation can overwrite an existing destination; the included paging rule needs a production multiwindow design; and deployment of the generated dashboard/alerts requires the documented Grafana/Prometheus integration.

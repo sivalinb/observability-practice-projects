@@ -1,5 +1,5 @@
 {
-  "recorded_at": "2026-10-18T22:29:49.473300+00:00",
+  "recorded_at": "2026-10-18T23:33:40.611030+00:00",
   "queries": [
     {
       "project": "01",
@@ -13,12 +13,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "accepted_events",
                 "project": "01"
               },
               "value": [
-                1792362589.447,
+                1792366420.66,
                 "25"
               ]
             },
@@ -26,12 +26,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "sink_unique_events",
                 "project": "01"
               },
               "value": [
-                1792362589.447,
+                1792366420.66,
                 "25"
               ]
             },
@@ -39,12 +39,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "delivery_attempts",
                 "project": "01"
               },
               "value": [
-                1792362589.447,
+                1792366420.66,
                 "26"
               ]
             },
@@ -52,12 +52,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "duplicates_suppressed",
                 "project": "01"
               },
               "value": [
-                1792362589.447,
+                1792366420.66,
                 "1"
               ]
             },
@@ -65,12 +65,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "wal_bytes",
                 "project": "01"
               },
               "value": [
-                1792362589.447,
+                1792366420.66,
                 "3485"
               ]
             },
@@ -78,38 +78,38 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "recovery_seconds",
                 "project": "01"
               },
               "value": [
-                1792362589.447,
-                "0.069"
+                1792366420.66,
+                "0.165"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "replay_events_per_second",
                 "project": "01"
               },
               "value": [
-                1792362589.447,
-                "362.4"
+                1792366420.66,
+                "151.5"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "incomplete_tail_bytes",
                 "project": "01"
               },
               "value": [
-                1792362589.447,
+                1792366420.66,
                 "20"
               ]
             },
@@ -117,12 +117,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "ingress_capacity",
                 "project": "01"
               },
               "value": [
-                1792362589.447,
+                1792366420.66,
                 "4"
               ]
             }
@@ -142,12 +142,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "before_violations",
                 "project": "02"
               },
               "value": [
-                1792362589.452,
+                1792366420.665,
                 "11"
               ]
             },
@@ -155,12 +155,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "after_violations",
                 "project": "02"
               },
               "value": [
-                1792362589.452,
+                1792366420.665,
                 "0"
               ]
             },
@@ -168,12 +168,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "histogram_series_before",
                 "project": "02"
               },
               "value": [
-                1792362589.452,
+                1792366420.665,
                 "168"
               ]
             },
@@ -181,12 +181,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "histogram_series_after",
                 "project": "02"
               },
               "value": [
-                1792362589.452,
+                1792366420.665,
                 "14"
               ]
             },
@@ -194,12 +194,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "histogram_declared_upper_bound",
                 "project": "02"
               },
               "value": [
-                1792362589.452,
+                1792366420.665,
                 "126"
               ]
             },
@@ -207,12 +207,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "histogram_wire_multiplier",
                 "project": "02"
               },
               "value": [
-                1792362589.452,
+                1792366420.665,
                 "7"
               ]
             }
@@ -232,12 +232,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "scenarios",
                 "project": "03"
               },
               "value": [
-                1792362589.457,
+                1792366420.671,
                 "7"
               ]
             },
@@ -245,12 +245,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "faults_detected",
                 "project": "03"
               },
               "value": [
-                1792362589.457,
+                1792366420.671,
                 "6"
               ]
             },
@@ -258,12 +258,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "http_ingest_accepts",
                 "project": "03"
               },
               "value": [
-                1792362589.457,
+                1792366420.671,
                 "36"
               ]
             },
@@ -271,12 +271,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "persisted_samples",
                 "project": "03"
               },
               "value": [
-                1792362589.457,
+                1792366420.671,
                 "35"
               ]
             },
@@ -284,12 +284,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "healthy_canary_samples",
                 "project": "03"
               },
               "value": [
-                1792362589.457,
+                1792366420.671,
                 "6"
               ]
             },
@@ -297,26 +297,26 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "stale_oldest_seconds",
                 "project": "03"
               },
               "value": [
-                1792362589.457,
-                "120.008"
+                1792366420.671,
+                "120.022"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "suite_seconds",
                 "project": "03"
               },
               "value": [
-                1792362589.457,
-                "0.0699"
+                1792366420.671,
+                "0.1425"
               ]
             }
           ]
@@ -335,12 +335,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "http_batches",
                 "project": "04"
               },
               "value": [
-                1792362589.461,
+                1792366420.674,
                 "1440"
               ]
             },
@@ -348,12 +348,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "executed_operations",
                 "project": "04"
               },
               "value": [
-                1792362589.461,
+                1792366420.674,
                 "1440000"
               ]
             },
@@ -361,12 +361,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "slo_percent",
                 "project": "04"
               },
               "value": [
-                1792362589.461,
+                1792366420.674,
                 "99.9"
               ]
             },
@@ -374,12 +374,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "fast_burn_rate",
                 "project": "04"
               },
               "value": [
-                1792362589.461,
+                1792366420.674,
                 "100"
               ]
             },
@@ -387,12 +387,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "slow_burn_rate",
                 "project": "04"
               },
               "value": [
-                1792362589.461,
+                1792366420.674,
                 "8"
               ]
             },
@@ -400,12 +400,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "fast_page_budget_percent",
                 "project": "04"
               },
               "value": [
-                1792362589.461,
+                1792366420.674,
                 "2"
               ]
             },
@@ -413,12 +413,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "slow_page_budget_percent",
                 "project": "04"
               },
               "value": [
-                1792362589.461,
+                1792366420.674,
                 "5"
               ]
             }
@@ -438,12 +438,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "requests",
                 "project": "05"
               },
               "value": [
-                1792362589.466,
+                1792366420.679,
                 "55"
               ]
             },
@@ -451,12 +451,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "noisy_rejections",
                 "project": "05"
               },
               "value": [
-                1792362589.466,
+                1792366420.679,
                 "33"
               ]
             },
@@ -464,12 +464,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "healthy_completions",
                 "project": "05"
               },
               "value": [
-                1792362589.466,
+                1792366420.679,
                 "12"
               ]
             },
@@ -477,12 +477,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "weighted_alpha_dispatches",
                 "project": "05"
               },
               "value": [
-                1792362589.466,
+                1792366420.679,
                 "20"
               ]
             },
@@ -490,12 +490,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "weighted_beta_dispatches",
                 "project": "05"
               },
               "value": [
-                1792362589.466,
+                1792366420.679,
                 "10"
               ]
             },
@@ -503,12 +503,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "max_per_tenant_concurrency",
                 "project": "05"
               },
               "value": [
-                1792362589.466,
+                1792366420.679,
                 "2"
               ]
             },
@@ -516,13 +516,13 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "healthy_max_latency_ms",
                 "project": "05"
               },
               "value": [
-                1792362589.466,
-                "95.76"
+                1792366420.679,
+                "94.44"
               ]
             }
           ]
@@ -541,12 +541,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "http_requests",
                 "project": "06"
               },
               "value": [
-                1792362589.47,
+                1792366420.682,
                 "24"
               ]
             },
@@ -554,12 +554,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "trace_count",
                 "project": "06"
               },
               "value": [
-                1792362589.47,
+                1792366420.682,
                 "12"
               ]
             },
@@ -567,12 +567,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "span_count",
                 "project": "06"
               },
               "value": [
-                1792362589.47,
+                1792366420.682,
                 "48"
               ]
             },
@@ -580,12 +580,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "head_retained",
                 "project": "06"
               },
               "value": [
-                1792362589.47,
+                1792366420.682,
                 "3"
               ]
             },
@@ -593,12 +593,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "tail_retained",
                 "project": "06"
               },
               "value": [
-                1792362589.47,
+                1792366420.682,
                 "2"
               ]
             },
@@ -606,52 +606,52 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "baseline_median_us",
                 "project": "06"
               },
               "value": [
-                1792362589.47,
-                "69.882"
+                1792366420.682,
+                "70.43"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "traced_median_us",
                 "project": "06"
               },
               "value": [
-                1792362589.47,
-                "87.185"
+                1792366420.682,
+                "88.619"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "instrumentation_delta_us",
                 "project": "06"
               },
               "value": [
-                1792362589.47,
-                "17.303"
+                1792366420.682,
+                "18.189"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "instrumentation_delta_percent",
                 "project": "06"
               },
               "value": [
-                1792362589.47,
-                "24.76"
+                1792366420.682,
+                "25.82"
               ]
             }
           ]
@@ -670,12 +670,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "requests",
                 "project": "07"
               },
               "value": [
-                1792362589.474,
+                1792366420.687,
                 "3000"
               ]
             },
@@ -683,12 +683,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "baseline_gzip_bytes",
                 "project": "07"
               },
               "value": [
-                1792362589.474,
+                1792366420.687,
                 "79102"
               ]
             },
@@ -696,12 +696,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "aggregate_gzip_bytes",
                 "project": "07"
               },
               "value": [
-                1792362589.474,
+                1792366420.687,
                 "561"
               ]
             },
@@ -709,12 +709,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "mean_shard_p95_ms",
                 "project": "07"
               },
               "value": [
-                1792362589.474,
+                1792366420.687,
                 "605"
               ]
             },
@@ -722,12 +722,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "correct_combined_p95_ms",
                 "project": "07"
               },
               "value": [
-                1792362589.474,
+                1792366420.687,
                 "10"
               ]
             },
@@ -735,13 +735,13 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "execution_seconds",
                 "project": "07"
               },
               "value": [
-                1792362589.474,
-                "0.065"
+                1792366420.687,
+                "0.0593"
               ]
             }
           ]
@@ -760,12 +760,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "source_records",
                 "project": "08"
               },
               "value": [
-                1792362589.478,
+                1792366420.691,
                 "7"
               ]
             },
@@ -773,12 +773,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "retrieved_records",
                 "project": "08"
               },
               "value": [
-                1792362589.478,
+                1792366420.691,
                 "6"
               ]
             },
@@ -786,12 +786,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "supported_citations",
                 "project": "08"
               },
               "value": [
-                1792362589.478,
+                1792366420.691,
                 "3"
               ]
             },
@@ -799,12 +799,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "abstention_cases",
                 "project": "08"
               },
               "value": [
-                1792362589.478,
+                1792366420.691,
                 "2"
               ]
             },
@@ -812,12 +812,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "execution_seconds",
                 "project": "08"
               },
               "value": [
-                1792362589.478,
+                1792366420.691,
                 "0.0007"
               ]
             }
@@ -837,12 +837,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "requests",
                 "project": "09"
               },
               "value": [
-                1792362589.483,
+                1792366420.695,
                 "10"
               ]
             },
@@ -850,12 +850,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "generated_tokens",
                 "project": "09"
               },
               "value": [
-                1792362589.483,
+                1792366420.695,
                 "232"
               ]
             },
@@ -863,12 +863,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "max_active_workers",
                 "project": "09"
               },
               "value": [
-                1792362589.483,
+                1792366420.695,
                 "2"
               ]
             },
@@ -876,78 +876,78 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "burst_tokens_per_second",
                 "project": "09"
               },
               "value": [
-                1792362589.483,
-                "676.081"
+                1792366420.695,
+                "694.546"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "max_queue_seconds",
                 "project": "09"
               },
               "value": [
-                1792362589.483,
-                "0.047335"
+                1792366420.695,
+                "0.000121"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "short_prompt_ttft_seconds",
                 "project": "09"
               },
               "value": [
-                1792362589.483,
-                "0.010702"
+                1792366420.695,
+                "0.002319"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "long_prompt_ttft_seconds",
                 "project": "09"
               },
               "value": [
-                1792362589.483,
-                "0.036952"
+                1792366420.695,
+                "0.037782"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "mean_burst_tpot_seconds",
                 "project": "09"
               },
               "value": [
-                1792362589.483,
-                "0.001662"
+                1792366420.695,
+                "0.000956"
               ]
             },
             {
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "execution_seconds",
                 "project": "09"
               },
               "value": [
-                1792362589.483,
-                "0.8563"
+                1792366420.695,
+                "0.8497"
               ]
             }
           ]
@@ -966,12 +966,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "generated_files",
                 "project": "10"
               },
               "value": [
-                1792362589.487,
+                1792366420.699,
                 "10"
               ]
             },
@@ -979,12 +979,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "rejected_invalid_contracts",
                 "project": "10"
               },
               "value": [
-                1792362589.487,
+                1792366420.699,
                 "4"
               ]
             },
@@ -992,12 +992,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "exported_spans",
                 "project": "10"
               },
               "value": [
-                1792362589.487,
+                1792366420.699,
                 "6"
               ]
             },
@@ -1005,12 +1005,12 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "http_requests",
                 "project": "10"
               },
               "value": [
-                1792362589.487,
+                1792366420.699,
                 "5"
               ]
             },
@@ -1018,39 +1018,39 @@
               "metric": {
                 "__name__": "prep_measurement",
                 "instance": "prep:8000",
-                "job": "principal-prep",
-                "measurement": "metric_bytes",
-                "project": "10"
-              },
-              "value": [
-                1792362589.487,
-                "8384"
-              ]
-            },
-            {
-              "metric": {
-                "__name__": "prep_measurement",
-                "instance": "prep:8000",
-                "job": "principal-prep",
-                "measurement": "execution_seconds",
-                "project": "10"
-              },
-              "value": [
-                1792362589.487,
-                "0.35"
-              ]
-            },
-            {
-              "metric": {
-                "__name__": "prep_measurement",
-                "instance": "prep:8000",
-                "job": "principal-prep",
+                "job": "observability-practice",
                 "measurement": "json_log_records",
                 "project": "10"
               },
               "value": [
-                1792362589.487,
+                1792366420.699,
                 "4"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "observability-practice",
+                "measurement": "metric_bytes",
+                "project": "10"
+              },
+              "value": [
+                1792366420.699,
+                "8390"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "observability-practice",
+                "measurement": "execution_seconds",
+                "project": "10"
+              },
+              "value": [
+                1792366420.699,
+                "0.3761"
               ]
             }
           ]

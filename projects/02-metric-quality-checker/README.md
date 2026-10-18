@@ -32,7 +32,7 @@ The versioned contract lists a metric's type, unit, owner, required naming suffi
 
 The bad fixture contains 24 distinct user IDs, an altered histogram bucket layout, unknown and missing labels, an invalid route value, wrong units and owner, a negative counter, an expired legacy metric, and an unregistered metric. The corrected fixture uses approved labels and metadata. Warn and enforce modes share identical diagnostics; only the admission decision differs.
 
-## Principal-level thought process
+## Design reasoning
 
 **Requirements.** Preserve aggregatability, bound storage/query load, give each metric an owner, and allow teams to migrate without surprise data loss. Treat a schema change as an API change. Contract review belongs near the instrumented application, while observed-cardinality monitoring belongs at the ingestion/backend boundary; static validation alone cannot establish runtime cardinality.
 
@@ -46,7 +46,7 @@ Translate series into resource planning only with measurement: `ingest_samples_p
 
 **Rollout.** Inventory metrics, assign owners, and measure observed budgets. Start in warn mode, track violation volume and false positives, and set removal deadlines with replacement names. Enforce cheap high-confidence checks for new metrics first; migrate legacy emitters behind canaries. Record rejection counters through an independently protected low-cardinality path. Version bucket changes and avoid mixing incompatible bucket layouts under one metric name.
 
-**Interview narrative.** Start with the cost or correctness failure you are preventing, distinguish observed usage from possible combinations, show histogram multiplication, and discuss label churn. Explain why policy must have migration stages, owners and an escape policy. Describe how you would measure whether rejection improved platform reliability without hiding critical incident data.
+**Walkthrough.** Start with the cost or correctness failure you are preventing, distinguish observed usage from possible combinations, show histogram multiplication, and discuss label churn. Explain why policy must have migration stages, owners and an escape policy. Describe how you would measure whether rejection improved platform reliability without hiding critical incident data.
 
 ## Shared stack connection
 

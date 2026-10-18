@@ -26,7 +26,7 @@ python run.py --project 08
 
 For an OpenAI-compatible chat endpoint, set `INVESTIGATOR_PROVIDER=openai-compatible`, `INVESTIGATOR_ENDPOINT` to its API base including `/v1` if required, and `INVESTIGATOR_MODEL` to an installed model. A bearer token is read from `INVESTIGATOR_API_KEY` when needed. Credentials are never written into artifacts. Both adapters make real HTTP requests. `model-investigation.json` exists only after a successful, validated live model invocation; connection errors and validation failures fail the run. Nothing silently substitutes a fabricated model answer.
 
-## The principal engineer thought process
+## Design reasoning
 
 Begin with the cost of being wrong. An investigator that sounds decisive but fabricates a cause creates more work during an incident. The useful first product is read-only, can cite every observation, keeps alternatives visible, scopes data to the right tenant and time, and says “insufficient evidence.” Automated remediation is outside this project.
 
@@ -70,10 +70,10 @@ Python owns retrieval, evaluation and the HTTP model adapters. The repository's 
 
 Do not add a WAL to an in-memory hypothesis list: it can be regenerated from the evidence snapshot. Preserve the evidence before investigation begins. The shared pipeline demonstrates filesystem queues and WAL at that boundary. Kafka becomes useful if evidence snapshots arrive continuously and several investigator/evaluator consumers require independent replay. It is not required to search seven local observations.
 
-## Rollout, evaluation and interview narrative
+## Rollout and walkthrough
 
 Run the baseline against incidents with known outcomes before adding a model. Measure unsupported-conclusion rate, useful abstention, citation validity, tenant leakage, retrieved-source coverage and investigation time. Compare the model to the baseline on held-out cases. A more fluent report without better diagnostic accuracy is not an improvement. Start read-only, add operator feedback and preserve the full evidence snapshot and model version for reproducibility.
 
-In an interview, walk through the contradictory-probe case first: there is enough tempting evidence to make a confident claim, but direct disagreement blocks it. Explain how untrusted log content differs from trusted policy, why provenance checks alone do not establish truth, and how a deterministic baseline helps quantify whether an LLM adds value.
+**Walkthrough.** Start with the contradictory-probe case: there is enough tempting evidence to make a confident claim, but direct disagreement blocks it. Explain how untrusted log content differs from trusted policy, why provenance checks alone do not establish truth, and how a deterministic baseline helps quantify whether an LLM adds value.
 
 Limitations: local lexical retrieval lacks semantic understanding; structured signal annotations are synthetic ground truth; the baseline is not a general incident classifier; live model quality depends on the selected endpoint. No live-model result is claimed unless an actual invocation artifact is present. This system makes no production change and sends no incident messages.

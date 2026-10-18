@@ -75,7 +75,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(200, "text/html", render(report))
         if path == "/":
             cards = "".join(f'<a class="card" href="/project/{r["id"]}"><img src="/assets/{r["id"]}/architecture.webp"><div><span class="eyebrow">PROJECT {r["id"]}</span><h2>{escape(r["title"])}</h2><p>{sum(c["passed"] for c in r["checks"])} scenario checks passed · {r["duration_seconds"]} seconds</p></div></a>' for r in reports())
-            return self.send(200, "text/html", shell("Observability Practice Projects", '<div class="topline"><span class="eyebrow">PYTHON · FLUENT BIT · OPENTELEMETRY · GRAFANA</span><span class="badge">10 PERSONAL LEARNING PROJECTS</span></div><h1>Learn by investigating failures.</h1><p>Runnable projects, measured experiments, architectural decisions, and evidence for Principal Engineer interviews.</p><div class="indexgrid">' + cards + '</div><div class="footer">Each page reads real execution reports. Architecture illustrations are conceptual; component configurations are in infra/.</div>'))
+            return self.send(200, "text/html", shell("Observability Practice Projects", '<div class="topline"><span class="eyebrow">PYTHON · FLUENT BIT · OPENTELEMETRY · GRAFANA</span><span class="badge">10 PERSONAL LEARNING PROJECTS</span></div><h1>Learn by investigating failures.</h1><p>Runnable projects, measured experiments, architectural decisions, and verified observability evidence.</p><div class="indexgrid">' + cards + '</div><div class="footer">Each page reads real execution reports. Architecture illustrations are conceptual; component configurations are in infra/.</div>'))
         self.send(404, "text/plain", "Not found")
 
     def send(self, code, content_type, body):

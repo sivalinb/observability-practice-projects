@@ -29,7 +29,7 @@ The root runner writes a report and state artifacts into its reported output dir
 
 The sink also uses SQLite's own WAL mode and `synchronous=FULL`. That database journal is separate from the application's append-only delivery WAL: one protects transactional sink writes, while the other retains events until delivery acknowledgement.
 
-## Principal-level thought process
+## Design reasoning
 
 **Requirements.** An accepted event must survive a sender process exit; retries must not lose acknowledged work; memory and disk must have finite bounds; recovery must expose corruption rather than silently omit data. Define “accepted” as **append and fsync complete**, not arrival in a volatile queue. The client cannot promise preservation of an event rejected before this point.
 
@@ -43,7 +43,7 @@ Recovery capacity must exceed live arrival rate. If incoming rate is `lambda`, r
 
 **Rollout.** Measure arrival rate and record size first. Size an outage budget, run a canary sender, and alert on queue bytes, oldest unacknowledged age, capacity remaining, replay rate and checkpoint errors. Expand through fault-tested cohorts. Trigger disk-capacity admission control before exhausting the host. Check replay load against ingestion and query SLOs before increasing concurrency.
 
-**Interview narrative.** Begin with the accepted-data boundary and recovery objective, draw the sink-commit/client-ack ambiguity, then derive storage and catch-up capacity. Explain which durability boundary you can prove and which requires replicated storage. Finish with operational signals, overload policy, and why an idempotency key changes duplicate effects but not transport semantics.
+**Walkthrough.** Begin with the accepted-data boundary and recovery objective, draw the sink-commit/client-ack ambiguity, then derive storage and catch-up capacity. Explain which durability boundary you can prove and which requires replicated storage. Finish with operational signals, overload policy, and why an idempotency key changes duplicate effects but not transport semantics.
 
 ## Shared stack connection
 

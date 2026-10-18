@@ -28,7 +28,7 @@ The root runner records the persistent `canary.sqlite` and `canary-outcomes.json
 4. A reader retrieves samples through an HTTP query endpoint and compares them with the original expectations. It verifies sequence completeness/uniqueness, exact values, exact label schema and a 30-second freshness budget. Empty results fail the dead-man test.
 5. The demo reports 36 accepted POSTs and 35 stored samples. Healthy data passes; every injected failure is independently detected.
 
-## Principal-level thought process
+## Design reasoning
 
 **Requirements.** Establish completeness, freshness, label integrity, numerical integrity and query availability from the user's read surface. Avoid circular validation: if the checker derives its expected count from the collector's accepted count, dropped data can look correct. The producer's expected sequence and arithmetic function live outside the mutation path, and the query reader compares with that source of truth.
 
@@ -42,7 +42,7 @@ The root runner records the persistent `canary.sqlite` and `canary-outcomes.json
 
 **Rollout.** First run a shadow canary against one region and one low-risk tenant class. Observe lateness distributions and maintenance behavior before setting paging thresholds. Expand across ingestion, storage and query routes; budget identities to prevent the checker causing cardinality problems. Distinguish query failures, stale data and missing producer signals in alerts. Test the independent alert route and whole-checker silence, then run scheduled failure exercises with measurable detection and recovery objectives.
 
-**Interview narrative.** Open with “the process is healthy but the dashboard is wrong.” Identify the independent source of truth, walk through a silently dropped acknowledged event, and explain why a read-after-write check catches more than a collector heartbeat. Derive detection delay and checker cost, discuss late data versus loss and clock skew, and finish with independent alerting and representative coverage.
+**Walkthrough.** Open with “the process is healthy but the dashboard is wrong.” Identify the independent source of truth, walk through a silently dropped acknowledged event, and explain why a read-after-write check catches more than a collector heartbeat. Derive detection delay and checker cost, discuss late data versus loss and clock skew, and finish with independent alerting and representative coverage.
 
 ## Shared stack connection
 

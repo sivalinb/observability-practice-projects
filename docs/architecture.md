@@ -16,7 +16,7 @@ Three telemetry paths leave the runner:
 | --- | --- | --- |
 | Numeric experiment results | `run_demo → latest.json → prep:8000/metrics → Prometheus scrape every 5s` | Grafana Prometheus source; `prep_measurement`, `prep_check_result`, execution time and last-run timestamp |
 | SDK traces and check counter | Python OpenTelemetry SDK → OTLP HTTP `otel:4318` → Collector `memory_limiter` → persistent exporter queue → `tempo:4318` for traces or `prometheus:9090/api/v1/otlp/v1/metrics` for metrics | Grafana Tempo source; Prometheus `prep_check_runs_total` |
-| JSON scenario evidence | Runner fsynced `app.jsonl` → shared named volume → Fluent Bit tail/parser → filesystem chunks → Loki HTTP at `loki:3100` | Grafana Loki source; `{job="principal-prep",project="01"}` |
+| JSON scenario evidence | Runner fsynced `app.jsonl` → shared named volume → Fluent Bit tail/parser → filesystem chunks → Loki HTTP at `loki:3100` | Grafana Loki source; `{job="observability-practice",project="01"}` |
 
 These are separate paths. The `prep_measurement` values come from saved project results exposed for scraping; they are not a renamed copy of the SDK counter. The SDK counter measures executed checks. Traces help inspect project/check execution. The logs retain scenario names, decisions, detail and run IDs. If one path is unavailable, another path's success does not prove it delivered.
 
@@ -69,7 +69,7 @@ Open [Grafana](http://localhost:13000/d/prep-overview), choose the project's pro
 For each project, query Loki with its bounded project label and inspect `passed`, `detail` and `run_id`:
 
 ```logql
-{job="principal-prep",project="01"} | json
+{job="observability-practice",project="01"} | json
 ```
 
 Runner outcome logs do not carry the SDK span trace ID; join their evidence by project, run ID and time. Project 10's generated request logs do carry actual trace IDs, which its local assertions compare with HTTP responses and exported spans. The core Fluent Bit instance tails the runner's `app.jsonl`; it does not automatically tail every generated service artifact.
@@ -133,4 +133,4 @@ All published service ports bind to `127.0.0.1`. Container-to-container traffic 
 
 Named volumes keep reports/logs, Collector queues, Fluent Bit cursor/chunks, Prometheus data, Tempo WAL/blocks, Loki data, Kafka data and Grafana state across container restarts. They remain on the local container runtime's storage; `down --volumes` or runtime/disk loss can remove them. Prometheus retains two days, and Tempo's configured trace retention is 48 hours. These local settings are chosen for practice cost and inspection, not a production retention or high-availability policy.
 
-For an interview, defend the accepted-data boundary first, then derive outage storage and catch-up capacity. Explain which component owns each retry and which downstream acceptance it observes. Use the report, exact backend query and failure-injection evidence to support the claim; keep untested disk-loss, scaling and regional guarantees outside it.
+When reviewing a design, define the accepted-data boundary first, then derive outage storage and catch-up capacity. Explain which component owns each retry and which downstream acceptance it observes. Use the report, exact backend query and failure-injection evidence to support the claim; keep untested disk-loss, scaling and regional guarantees outside it.

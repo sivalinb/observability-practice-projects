@@ -51,8 +51,8 @@
       "delivery_attempts": 26,
       "duplicates_suppressed": 1,
       "wal_bytes": 3485,
-      "recovery_seconds": 0.069,
-      "replay_events_per_second": 362.4,
+      "recovery_seconds": 0.165,
+      "replay_events_per_second": 151.5,
       "incomplete_tail_bytes": 20,
       "ingress_capacity": 4
     },
@@ -75,7 +75,7 @@
       },
       {
         "phase": "Recovery",
-        "detail": "25 unique events recovered in 0.069s; sequential checkpoints persisted."
+        "detail": "25 unique events recovered in 0.165s; sequential checkpoints persisted."
       }
     ],
     "scenarios": [
@@ -90,14 +90,14 @@
       "finite configured WAL capacity"
     ],
     "artifacts": {
-      "wal": "/app/artifacts/01/fc11806eb176/recovery-cryuqrey/events.jsonl",
-      "sink": "/app/artifacts/01/fc11806eb176/recovery-cryuqrey/sink.sqlite",
-      "checkpoint": "/app/artifacts/01/fc11806eb176/recovery-cryuqrey/events.checkpoint.json"
+      "wal": "/app/artifacts/01/b105b1d9cd75/recovery-hakzbvcg/events.jsonl",
+      "sink": "/app/artifacts/01/b105b1d9cd75/recovery-hakzbvcg/sink.sqlite",
+      "checkpoint": "/app/artifacts/01/b105b1d9cd75/recovery-hakzbvcg/events.checkpoint.json"
     },
-    "run_id": "fc11806eb176",
-    "executed_at": "2026-10-18T22:24:32.455626+00:00",
-    "duration_seconds": 0.8157,
-    "artifact_path": "01/fc11806eb176"
+    "run_id": "b105b1d9cd75",
+    "executed_at": "2026-10-18T23:29:17.872284+00:00",
+    "duration_seconds": 0.9439,
+    "artifact_path": "01/b105b1d9cd75"
   },
   {
     "id": "02",
@@ -185,10 +185,10 @@
       "duplicate observation stability",
       "clean snapshot acceptance"
     ],
-    "run_id": "59fbad324485",
-    "executed_at": "2026-10-18T22:24:32.463890+00:00",
-    "duration_seconds": 0.0029,
-    "artifact_path": "02/59fbad324485"
+    "run_id": "bd3ba61211a9",
+    "executed_at": "2026-10-18T23:29:17.876885+00:00",
+    "duration_seconds": 0.0022,
+    "artifact_path": "02/bd3ba61211a9"
   },
   {
     "id": "03",
@@ -243,8 +243,8 @@
       "persisted_samples": 35,
       "healthy_canary_samples": 6,
       "dropped_missing_sequence": "[3]",
-      "stale_oldest_seconds": 120.008,
-      "suite_seconds": 0.0699
+      "stale_oldest_seconds": 120.022,
+      "suite_seconds": 0.1425
     },
     "timeline": [
       {
@@ -275,13 +275,13 @@
       "green process health during data failures"
     ],
     "artifacts": {
-      "store": "/app/artifacts/03/dff4ccd10126/accuracy-mxmcpo7z/canary.sqlite",
-      "outcomes": "/app/artifacts/03/dff4ccd10126/canary-outcomes.json"
+      "store": "/app/artifacts/03/5104841b8a06/accuracy-f0o2gxu8/canary.sqlite",
+      "outcomes": "/app/artifacts/03/5104841b8a06/canary-outcomes.json"
     },
-    "run_id": "dff4ccd10126",
-    "executed_at": "2026-10-18T22:24:33.058853+00:00",
-    "duration_seconds": 0.5925,
-    "artifact_path": "03/dff4ccd10126"
+    "run_id": "5104841b8a06",
+    "executed_at": "2026-10-18T23:29:18.532001+00:00",
+    "duration_seconds": 0.6531,
+    "artifact_path": "03/5104841b8a06"
   },
   {
     "id": "04",
@@ -361,10 +361,10 @@
       "absent_data",
       "late_data"
     ],
-    "run_id": "b59396378fae",
-    "executed_at": "2026-10-18T22:24:34.238653+00:00",
-    "duration_seconds": 1.1742,
-    "artifact_path": "04/b59396378fae"
+    "run_id": "eb1b97a81978",
+    "executed_at": "2026-10-18T23:29:19.831498+00:00",
+    "duration_seconds": 1.2981,
+    "artifact_path": "04/eb1b97a81978"
   },
   {
     "id": "05",
@@ -419,7 +419,7 @@
       "weighted_alpha_dispatches": 20,
       "weighted_beta_dispatches": 10,
       "max_per_tenant_concurrency": 2,
-      "healthy_max_latency_ms": 95.76
+      "healthy_max_latency_ms": 94.44
     },
     "timeline": [
       {
@@ -445,10 +445,10 @@
       "weighted_dispatch_fairness",
       "bounded_per_tenant_queue"
     ],
-    "run_id": "108304560876",
-    "executed_at": "2026-10-18T22:24:34.817805+00:00",
-    "duration_seconds": 0.5749,
-    "artifact_path": "05/108304560876"
+    "run_id": "0211374ad5dc",
+    "executed_at": "2026-10-18T23:29:21.379469+00:00",
+    "duration_seconds": 1.5461,
+    "artifact_path": "05/0211374ad5dc"
   },
   {
     "id": "06",
@@ -473,7 +473,7 @@
       {
         "name": "slow_dependency_retained",
         "passed": true,
-        "detail": "Slow trace duration 45.35ms"
+        "detail": "Slow trace duration 41.48ms"
       },
       {
         "name": "profile_identifies_cpu_function",
@@ -483,7 +483,7 @@
       {
         "name": "instrumentation_overhead_measured",
         "passed": true,
-        "detail": "median delta 17.303\u00b5s over seven alternating rounds"
+        "detail": "median delta 18.189\u00b5s over seven alternating rounds"
       }
     ],
     "measurements": {
@@ -493,10 +493,10 @@
       "head_retained": 3,
       "tail_retained": 2,
       "otel_sdk_enabled": "true",
-      "baseline_median_us": 69.882,
-      "traced_median_us": 87.185,
-      "instrumentation_delta_us": 17.303,
-      "instrumentation_delta_percent": 24.76
+      "baseline_median_us": 70.43,
+      "traced_median_us": 88.619,
+      "instrumentation_delta_us": 18.189,
+      "instrumentation_delta_percent": 25.82
     },
     "timeline": [
       {
@@ -520,10 +520,10 @@
       "profile_identifies_cpu_function",
       "instrumentation_overhead_measured"
     ],
-    "run_id": "66b0544d6495",
-    "executed_at": "2026-10-18T22:24:35.422422+00:00",
-    "duration_seconds": 0.6014,
-    "artifact_path": "06/66b0544d6495"
+    "run_id": "b6c9cfc10136",
+    "executed_at": "2026-10-18T23:29:21.965772+00:00",
+    "duration_seconds": 0.5833,
+    "artifact_path": "06/b6c9cfc10136"
   },
   {
     "id": "07",
@@ -572,7 +572,7 @@
       "aggregate_gzip_bytes": 561,
       "mean_shard_p95_ms": 605.0,
       "correct_combined_p95_ms": 10.0,
-      "execution_seconds": 0.065
+      "execution_seconds": 0.0593
     },
     "timeline": [
       {
@@ -603,10 +603,10 @@
       "Unsafe quantile averaging",
       "Measured gzip size and explicit pricing assumptions"
     ],
-    "run_id": "3a26da2e3240",
-    "executed_at": "2026-10-18T22:24:35.491730+00:00",
-    "duration_seconds": 0.0663,
-    "artifact_path": "07/3a26da2e3240"
+    "run_id": "3169ff7fede1",
+    "executed_at": "2026-10-18T23:29:22.027410+00:00",
+    "duration_seconds": 0.0601,
+    "artifact_path": "07/3169ff7fede1"
   },
   {
     "id": "08",
@@ -685,10 +685,10 @@
       "Tenant scoping",
       "Optional real model with fail-closed validation"
     ],
-    "run_id": "5abf5d03654f",
-    "executed_at": "2026-10-18T22:24:35.495126+00:00",
+    "run_id": "2a66cd8eebb0",
+    "executed_at": "2026-10-18T23:29:22.030937+00:00",
     "duration_seconds": 0.0013,
-    "artifact_path": "08/5abf5d03654f"
+    "artifact_path": "08/2a66cd8eebb0"
   },
   {
     "id": "09",
@@ -713,7 +713,7 @@
       {
         "name": "Queue time and inference time are separately measured",
         "passed": true,
-        "detail": "Maximum queue wait 0.0473 seconds; no artificial sleeps."
+        "detail": "Maximum queue wait 0.0001 seconds; no artificial sleeps."
       },
       {
         "name": "Metrics expose completed requests and tokens",
@@ -735,12 +735,12 @@
       "requests": 10,
       "generated_tokens": 232,
       "max_active_workers": 2,
-      "burst_tokens_per_second": 676.081,
-      "max_queue_seconds": 0.047335,
-      "short_prompt_ttft_seconds": 0.010702,
-      "long_prompt_ttft_seconds": 0.036952,
-      "mean_burst_tpot_seconds": 0.001662,
-      "execution_seconds": 0.8563
+      "burst_tokens_per_second": 694.546,
+      "max_queue_seconds": 0.000121,
+      "short_prompt_ttft_seconds": 0.002319,
+      "long_prompt_ttft_seconds": 0.037782,
+      "mean_burst_tpot_seconds": 0.000956,
+      "execution_seconds": 0.8497
     },
     "timeline": [
       {
@@ -775,10 +775,10 @@
       "Prometheus metrics",
       "Optional Ollama real LLM comparison"
     ],
-    "run_id": "58a2ad75491c",
-    "executed_at": "2026-10-18T22:24:36.353599+00:00",
-    "duration_seconds": 0.8572,
-    "artifact_path": "09/58a2ad75491c"
+    "run_id": "faccc1282751",
+    "executed_at": "2026-10-18T23:29:22.885560+00:00",
+    "duration_seconds": 0.8507,
+    "artifact_path": "09/faccc1282751"
   },
   {
     "id": "10",
@@ -837,8 +837,8 @@
       "exported_spans": 6,
       "http_requests": 5,
       "json_log_records": 4,
-      "metric_bytes": 8384,
-      "execution_seconds": 0.35
+      "metric_bytes": 8390,
+      "execution_seconds": 0.3761
     },
     "timeline": [
       {
@@ -874,9 +874,9 @@
       "Fluent Bit SQLite WAL and filesystem queue configuration",
       "Docker and Grafana onboarding assets"
     ],
-    "run_id": "de2d3faabdcc",
-    "executed_at": "2026-10-18T22:24:36.706230+00:00",
-    "duration_seconds": 0.3508,
-    "artifact_path": "10/de2d3faabdcc"
+    "run_id": "e77aed119016",
+    "executed_at": "2026-10-18T23:29:23.265611+00:00",
+    "duration_seconds": 0.377,
+    "artifact_path": "10/e77aed119016"
   }
 ]

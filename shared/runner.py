@@ -47,14 +47,14 @@ class Telemetry:
         from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
 
         endpoint = os.environ["OTEL_EXPORTER_OTLP_ENDPOINT"].rstrip("/")
-        resource = Resource.create({"service.name": "principal-prep", "service.version": "1.0.0"})
+        resource = Resource.create({"service.name": "observability-practice", "service.version": "1.0.0"})
         self.provider = TracerProvider(resource=resource)
         self.provider.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(endpoint=endpoint + "/v1/traces")))
         trace.set_tracer_provider(self.provider)
-        self.tracer = trace.get_tracer("principal-prep")
+        self.tracer = trace.get_tracer("observability-practice")
         reader = PeriodicExportingMetricReader(OTLPMetricExporter(endpoint=endpoint + "/v1/metrics"), export_interval_millis=2000)
         self.meter_provider = MeterProvider(resource=resource, metric_readers=[reader])
-        self.counter = self.meter_provider.get_meter("principal-prep").create_counter("prep_check_runs", description="Executed scenario checks")
+        self.counter = self.meter_provider.get_meter("observability-practice").create_counter("prep_check_runs", description="Executed scenario checks")
 
     def span(self, name, **attributes):
         return self.tracer.start_as_current_span(name, attributes=attributes) if self.tracer else nullcontext()
@@ -105,7 +105,7 @@ def execute(identifier, telemetry=None):
     with (LOG_DIR / "app.jsonl").open("a") as log:
         for check in report["checks"]:
             log.write(json.dumps({"timestamp": time.time(), "event_id": uuid.uuid4().hex, "project": identifier,
-                                  "service": "principal-prep", "scenario": check["name"], "passed": check["passed"],
+                                  "service": "observability-practice", "scenario": check["name"], "passed": check["passed"],
                                   "detail": check.get("detail", ""), "run_id": out.name}, default=str) + "\n")
         log.flush()
         os.fsync(log.fileno())
