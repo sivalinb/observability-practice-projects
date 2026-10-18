@@ -1,0 +1,3 @@
+FROM prom/prometheus:v3.7.3
+COPY infra/prometheus.yml /etc/prometheus/prometheus.yml
+COPY projects/04-service-health-alerts/prometheus-rules.yml /etc/prometheus/rules.yml

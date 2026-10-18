@@ -1,0 +1,61 @@
+rule_files:
+  - prometheus-rules.yml
+evaluation_interval: 1m
+tests:
+  - name: sustained-two-percent-errors
+    interval: 1m
+    input_series:
+      - series: 'prep_sli_requests_total{project="04"}'
+        values: '0+1000x120'
+      - series: 'prep_sli_errors_total{project="04"}'
+        values: '0+20x120'
+      - series: 'prep_sli_last_sample_timestamp_seconds{project="04"}'
+        values: '0+60x120'
+    alert_rule_test:
+      - eval_time: 2h
+        alertname: ServiceErrorBudgetBurn
+        exp_alerts:
+          - exp_labels:
+              project: '04'
+              severity: page
+            exp_annotations:
+              summary: Service error budget is burning rapidly
+      - eval_time: 2h
+        alertname: ServiceTelemetryMissing
+        exp_alerts: []
+  - name: absent-data-does-not-look-healthy
+    interval: 1m
+    input_series: []
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: ServiceTelemetryMissing
+        exp_alerts:
+          - exp_labels:
+              project: '04'
+              severity: ticket
+            exp_annotations:
+              summary: Service SLI telemetry is missing or stale
+      - eval_time: 1m
+        alertname: ServiceErrorBudgetBurn
+        exp_alerts: []
+  - name: future-timestamp-is-invalid-telemetry
+    interval: 1m
+    input_series:
+      - series: 'prep_sli_requests_total{project="04"}'
+        values: '0+1000x120'
+      - series: 'prep_sli_errors_total{project="04"}'
+        values: '0+20x120'
+      - series: 'prep_sli_last_sample_timestamp_seconds{project="04"}'
+        values: '600+60x120'
+    alert_rule_test:
+      - eval_time: 2h
+        alertname: ServiceErrorBudgetBurn
+        exp_alerts: []
+      - eval_time: 2h
+        alertname: ServiceTelemetryMissing
+        exp_alerts:
+          - exp_labels:
+              project: '04'
+              severity: ticket
+            exp_annotations:
+              summary: Service SLI telemetry is missing or stale

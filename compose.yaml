@@ -1,0 +1,126 @@
+name: principal-observability
+services:
+  prep:
+    build: .
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel:4318
+      ARTIFACT_DIR: /app/artifacts
+      LOG_DIR: /app/data/logs
+    ports: ["127.0.0.1:18000:8000"]
+    volumes: ["prep-data:/app/data", "prep-artifacts:/app/artifacts"]
+    depends_on: [otel]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 36
+  live-sli:
+    build: .
+    command: ["python", "projects/04-service-health-alerts/live.py", "--host", "0.0.0.0"]
+    ports: ["127.0.0.1:18084:8084"]
+  otel:
+    build: {context: ., dockerfile: infra/Dockerfile.otel}
+    user: "0:0"
+    ports: ["127.0.0.1:14318:4318", "127.0.0.1:13333:13133"]
+    volumes: ["otel-wal:/var/lib/otelcol"]
+    depends_on: [tempo, prometheus]
+  prometheus:
+    build: {context: ., dockerfile: infra/Dockerfile.prometheus}
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--web.enable-otlp-receiver", "--storage.tsdb.retention.time=2d"]
+    ports: ["127.0.0.1:19090:9090"]
+    volumes: ["prometheus-data:/prometheus"]
+  tempo:
+    build: {context: ., dockerfile: infra/Dockerfile.tempo}
+    user: "0:0"
+    command: ["-config.file=/etc/tempo.yaml"]
+    ports: ["127.0.0.1:13200:3200"]
+    volumes: ["tempo-data:/var/tempo"]
+  loki:
+    build: {context: ., dockerfile: infra/Dockerfile.loki}
+    user: "0:0"
+    command: ["-config.file=/etc/loki/local.yaml"]
+    ports: ["127.0.0.1:13100:3100"]
+    volumes: ["loki-data:/loki"]
+  fluent-bit:
+    build: {context: ., dockerfile: infra/Dockerfile.fluent-bit}
+    user: "0:0"
+    volumes: ["prep-data:/data:ro", "fluent-storage:/var/fluent-bit"]
+    depends_on: [loki]
+    ports: ["127.0.0.1:12020:2020"]
+  grafana:
+    build: {context: ., dockerfile: infra/Dockerfile.grafana}
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_SECURITY_ADMIN_USER: prep
+      GF_SECURITY_ADMIN_PASSWORD: prep-local-only
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+    ports: ["127.0.0.1:13000:3000"]
+    volumes: ["grafana-data:/var/lib/grafana"]
+    depends_on: [prometheus, loki, tempo]
+  kafka:
+    image: apache/kafka:3.9.1
+    profiles: [replay]
+    user: "0:0"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: INTERNAL://:9092,EXTERNAL://:29092,CONTROLLER://:9093
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+    ports: ["127.0.0.1:29092:29092"]
+    volumes: ["kafka-data:/var/lib/kafka/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 10s
+      retries: 18
+  fluent-bit-kafka:
+    build: {context: ., dockerfile: infra/Dockerfile.fluent-bit}
+    profiles: [replay]
+    command: ["/fluent-bit/bin/fluent-bit", "-c", "/fluent-bit/etc/kafka.conf"]
+    user: "0:0"
+    volumes: ["prep-data:/data:ro", "fluent-kafka-storage:/var/fluent-bit"]
+    depends_on:
+      kafka: {condition: service_healthy}
+  kafka-bridge:
+    build: .
+    profiles: [replay]
+    command: ["python", "-m", "shared.kafka_bridge"]
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      LOKI_URL: http://loki:3100
+      BRIDGE_DB: /app/data/bridge/offsets.db
+    volumes: ["prep-data:/app/data"]
+    depends_on:
+      kafka: {condition: service_healthy}
+      loki: {condition: service_started}
+  ollama:
+    image: ollama/ollama:0.12.6
+    profiles: [ai]
+    ports: ["127.0.0.1:21434:11434"]
+    volumes: ["ollama-models:/root/.ollama"]
+volumes:
+  prep-data:
+  prep-artifacts:
+  otel-wal:
+  prometheus-data:
+  tempo-data:
+  loki-data:
+  fluent-storage:
+  fluent-kafka-storage:
+  kafka-data:
+  grafana-data:
+  ollama-models:

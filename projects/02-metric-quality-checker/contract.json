@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.1",
+  "forbidden_labels": ["user_id", "request_id", "email", "session_id"],
+  "metrics": {
+    "http_request_duration_seconds": {
+      "type": "histogram", "unit": "seconds", "owner": "checkout", "required_suffix": "_seconds",
+      "buckets": [0.1, 0.5, 1.0, 5.0],
+      "labels": {"service": ["checkout", "catalog"], "route": ["/checkout", "/cart", "/health"], "status": ["200", "400", "500"]},
+      "max_series": 126
+    },
+    "http_requests_total": {
+      "type": "counter", "unit": "requests", "owner": "checkout", "required_suffix": "_total",
+      "labels": {"service": ["checkout", "catalog"], "route": ["/checkout", "/cart", "/health"], "status": ["200", "400", "500"]},
+      "max_series": 18
+    },
+    "legacy_requests_total": {
+      "type": "counter", "unit": "requests", "owner": "checkout", "required_suffix": "_total",
+      "labels": {"service": ["checkout"]}, "max_series": 1,
+      "remove_after": "2026-10-01", "replacement": "http_requests_total"
+    }
+  }
+}

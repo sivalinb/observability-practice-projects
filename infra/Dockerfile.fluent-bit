@@ -1,0 +1,4 @@
+FROM fluent/fluent-bit:4.1.1
+COPY infra/fluent-bit.conf /fluent-bit/etc/fluent-bit.conf
+COPY infra/fluent-bit-kafka.conf /fluent-bit/etc/kafka.conf
+COPY infra/parsers.conf /fluent-bit/etc/parsers.conf

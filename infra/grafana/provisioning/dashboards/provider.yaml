@@ -1,0 +1,9 @@
+apiVersion: 1
+providers:
+  - name: Observability Practice Projects
+    folder: Observability Practice
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    options:
+      path: /etc/grafana/dashboards

@@ -1,0 +1,3 @@
+FROM grafana/grafana:12.2.1
+COPY infra/grafana/provisioning/ /etc/grafana/provisioning/
+COPY infra/grafana/dashboards/ /etc/grafana/dashboards/

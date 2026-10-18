@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+data/
+artifacts/
+*.db
+*.db-wal
+*.db-shm
+*.prof
+work/

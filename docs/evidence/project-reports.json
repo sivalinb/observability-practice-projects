@@ -1,0 +1,882 @@
+[
+  {
+    "id": "01",
+    "title": "Telemetry Recovery",
+    "summary": "Durable Python WAL recovered 25 events across a real HTTP outage and abrupt writer exit; one replay was deduplicated.",
+    "checks": [
+      {
+        "name": "Bounded ingress rejects overload",
+        "passed": true,
+        "detail": "Fifth item rejected by a four-slot queue before durable acceptance."
+      },
+      {
+        "name": "HTTP outage retains every accepted event",
+        "passed": true,
+        "detail": "503 response: delivered=0, checkpoint=0."
+      },
+      {
+        "name": "fsync survives abrupt process exit",
+        "passed": true,
+        "detail": "Child exited 27; recovered 25 events."
+      },
+      {
+        "name": "Incomplete tail recovered",
+        "passed": true,
+        "detail": "Removed 20 incomplete bytes; all complete records retained."
+      },
+      {
+        "name": "At-least-once replay deduplicated",
+        "passed": true,
+        "detail": "26 committed delivery attempts produced 25 unique event IDs."
+      },
+      {
+        "name": "Checkpoint survives reopen",
+        "passed": true,
+        "detail": "Durable checkpoint=25."
+      },
+      {
+        "name": "Finite disk capacity rejects before acceptance",
+        "passed": true,
+        "detail": "Configured 256-byte bound rejected an oversized record without changing accepted history."
+      },
+      {
+        "name": "Complete checksum corruption fails closed",
+        "passed": true,
+        "detail": "Corrupt complete record requires operator investigation; no silent skip."
+      }
+    ],
+    "measurements": {
+      "accepted_events": 25,
+      "sink_unique_events": 25,
+      "delivery_attempts": 26,
+      "duplicates_suppressed": 1,
+      "wal_bytes": 3485,
+      "recovery_seconds": 0.069,
+      "replay_events_per_second": 362.4,
+      "incomplete_tail_bytes": 20,
+      "ingress_capacity": 4
+    },
+    "timeline": [
+      {
+        "phase": "Durable acceptance",
+        "detail": "24 events appended and fsynced while a four-slot ingress demonstrates overload rejection."
+      },
+      {
+        "phase": "Backend outage",
+        "detail": "An actual local HTTP receiver returns 503; no WAL position advances."
+      },
+      {
+        "phase": "Writer crash",
+        "detail": "A child process fsyncs event 25 then exits abruptly; recovery trims an incomplete tail."
+      },
+      {
+        "phase": "Ambiguous acknowledgement",
+        "detail": "The sink commits one event before a simulated client restart; its replay is deduplicated."
+      },
+      {
+        "phase": "Recovery",
+        "detail": "25 unique events recovered in 0.069s; sequential checkpoints persisted."
+      }
+    ],
+    "scenarios": [
+      "HTTP 503 and retry retention",
+      "bounded in-memory admission",
+      "abrupt child-process exit after fsync",
+      "incomplete trailing write",
+      "complete checksum corruption",
+      "sink commit before client checkpoint",
+      "SQLite event-ID deduplication",
+      "durable sequential checkpoint",
+      "finite configured WAL capacity"
+    ],
+    "artifacts": {
+      "wal": "/app/artifacts/01/fc11806eb176/recovery-cryuqrey/events.jsonl",
+      "sink": "/app/artifacts/01/fc11806eb176/recovery-cryuqrey/sink.sqlite",
+      "checkpoint": "/app/artifacts/01/fc11806eb176/recovery-cryuqrey/events.checkpoint.json"
+    },
+    "run_id": "fc11806eb176",
+    "executed_at": "2026-10-18T22:24:32.455626+00:00",
+    "duration_seconds": 0.8157,
+    "artifact_path": "01/fc11806eb176"
+  },
+  {
+    "id": "02",
+    "title": "Metric Quality Checker",
+    "summary": "A versioned metric contract blocks unsafe labels and schema drift, distinguishes observed series from declared capacity, and supports a warn-first rollout.",
+    "checks": [
+      {
+        "name": "Bad snapshot blocked in enforce mode",
+        "passed": true,
+        "detail": "11 distinct contract violations."
+      },
+      {
+        "name": "Warn mode admits and reports",
+        "passed": true,
+        "detail": "Same diagnostics are emitted while ingestion remains permitted."
+      },
+      {
+        "name": "Repaired snapshot accepted",
+        "passed": true,
+        "detail": "Bounded vocabularies, metadata, metric names and histogram buckets match the contract."
+      },
+      {
+        "name": "Unbounded identity caught",
+        "passed": true,
+        "detail": "Before: 168 histogram wire series; budget 126."
+      },
+      {
+        "name": "Histogram expansion included",
+        "passed": true,
+        "detail": "Four finite buckets + +Inf + sum + count = seven wire series per observed label set."
+      },
+      {
+        "name": "Expired schema detected",
+        "passed": true,
+        "detail": "2026-10-18 evaluation blocks the legacy metric retired on 2026-10-01."
+      },
+      {
+        "name": "Metadata and bucket drift detected",
+        "passed": true,
+        "detail": "Ownership, unit, bucket layout and unregistered metrics are independently validated."
+      },
+      {
+        "name": "Duplicate observations do not inflate series",
+        "passed": true,
+        "detail": "Repeated same-label observation still yields 14 series."
+      }
+    ],
+    "measurements": {
+      "before_violations": 11,
+      "after_violations": 0,
+      "histogram_series_before": 168,
+      "histogram_series_after": 14,
+      "histogram_declared_upper_bound": 126,
+      "histogram_wire_multiplier": 7
+    },
+    "timeline": [
+      {
+        "phase": "Contract",
+        "detail": "Version schema, owner, units, label vocabularies, histogram boundaries and removal dates."
+      },
+      {
+        "phase": "Observe",
+        "detail": "The bad fixture creates 168 histogram series and 11 distinct violations."
+      },
+      {
+        "phase": "Warn",
+        "detail": "Emit the same evidence while allowing traffic, giving owners a migration window."
+      },
+      {
+        "phase": "Enforce",
+        "detail": "The repaired fixture passes with 14 observed histogram series versus 126 declared maximum."
+      }
+    ],
+    "scenarios": [
+      "forbidden per-user label",
+      "unregistered metric and label",
+      "missing bounded label",
+      "unit and owner mismatch",
+      "histogram bucket drift",
+      "observed cardinality over budget",
+      "declared upper-bound calculation",
+      "histogram wire-series expansion",
+      "expired schema replacement",
+      "warn versus enforce",
+      "duplicate observation stability",
+      "clean snapshot acceptance"
+    ],
+    "run_id": "59fbad324485",
+    "executed_at": "2026-10-18T22:24:32.463890+00:00",
+    "duration_seconds": 0.0029,
+    "artifact_path": "02/59fbad324485"
+  },
+  {
+    "id": "03",
+    "title": "Telemetry Accuracy Checker",
+    "summary": "An independent synthetic canary detects sequence loss, stale data, label/value corruption, failed queries and silence through a real HTTP-to-SQLite query path.",
+    "checks": [
+      {
+        "name": "Healthy canary accepted",
+        "passed": true,
+        "detail": "Process healthy=True; observed=6/6; signals=none."
+      },
+      {
+        "name": "Detect dropped",
+        "passed": true,
+        "detail": "Process healthy=True; observed=5/6; signals=sequence_gap."
+      },
+      {
+        "name": "Detect stale",
+        "passed": true,
+        "detail": "Process healthy=True; observed=6/6; signals=stale_data."
+      },
+      {
+        "name": "Detect wrong label",
+        "passed": true,
+        "detail": "Process healthy=True; observed=6/6; signals=wrong_label."
+      },
+      {
+        "name": "Detect wrong value",
+        "passed": true,
+        "detail": "Process healthy=True; observed=6/6; signals=wrong_value."
+      },
+      {
+        "name": "Detect query broken",
+        "passed": true,
+        "detail": "Process healthy=True; observed=0/6; signals=query_unavailable."
+      },
+      {
+        "name": "Detect dead man",
+        "passed": true,
+        "detail": "Process healthy=True; observed=0/6; signals=sequence_gap,dead_man."
+      },
+      {
+        "name": "Green health does not hide bad telemetry",
+        "passed": true,
+        "detail": "Every process health check returned 200 while all six independent data failures were caught."
+      }
+    ],
+    "measurements": {
+      "scenarios": 7,
+      "faults_detected": 6,
+      "http_ingest_accepts": 36,
+      "persisted_samples": 35,
+      "healthy_canary_samples": 6,
+      "dropped_missing_sequence": "[3]",
+      "stale_oldest_seconds": 120.008,
+      "suite_seconds": 0.0699
+    },
+    "timeline": [
+      {
+        "phase": "Independent expectation",
+        "detail": "The emitter knows six sequence IDs, exact arithmetic values and bounded labels before collection."
+      },
+      {
+        "phase": "Actual collection",
+        "detail": "36 HTTP accepts traverse a persistent SQLite collection path; one intentionally drops before storage."
+      },
+      {
+        "phase": "Fault injection",
+        "detail": "Collection rewrites data, loses one sample, or breaks SQL while process health remains green."
+      },
+      {
+        "phase": "Query verification",
+        "detail": "The reader compares stored data with expectations and checks freshness; silence triggers dead-man detection."
+      }
+    ],
+    "scenarios": [
+      "healthy end-to-end canary",
+      "collector drops acknowledged sample",
+      "stale stored timestamps",
+      "incorrect resource label",
+      "corrupted canary value",
+      "query layer SQL failure",
+      "absent producer / dead-man",
+      "green process health during data failures"
+    ],
+    "artifacts": {
+      "store": "/app/artifacts/03/dff4ccd10126/accuracy-mxmcpo7z/canary.sqlite",
+      "outcomes": "/app/artifacts/03/dff4ccd10126/canary-outcomes.json"
+    },
+    "run_id": "dff4ccd10126",
+    "executed_at": "2026-10-18T22:24:33.058853+00:00",
+    "duration_seconds": 0.5925,
+    "artifact_path": "03/dff4ccd10126"
+  },
+  {
+    "id": "04",
+    "title": "Service Health Alerts",
+    "summary": "Multiwindow burn-rate alerts distinguish brief spikes, sustained failures, slow burns, recovery, and missing data.",
+    "checks": [
+      {
+        "name": "brief_spike",
+        "passed": true,
+        "detail": "expected healthy; observed healthy"
+      },
+      {
+        "name": "sustained_failure",
+        "passed": true,
+        "detail": "expected page_fast; observed page_fast"
+      },
+      {
+        "name": "slow_burn",
+        "passed": true,
+        "detail": "expected page_slow; observed page_slow"
+      },
+      {
+        "name": "recovery",
+        "passed": true,
+        "detail": "expected healthy; observed healthy"
+      },
+      {
+        "name": "no_traffic",
+        "passed": true,
+        "detail": "expected no_traffic; observed no_traffic"
+      },
+      {
+        "name": "absent_data",
+        "passed": true,
+        "detail": "expected missing_data; observed missing_data"
+      },
+      {
+        "name": "late_data",
+        "passed": true,
+        "detail": "expected missing_data; observed missing_data"
+      },
+      {
+        "name": "real_http_workload",
+        "passed": true,
+        "detail": "1440 HTTP batches, 1440000 executed operations"
+      }
+    ],
+    "measurements": {
+      "http_batches": 1440,
+      "executed_operations": 1440000,
+      "slo_percent": 99.9,
+      "fast_burn_rate": 100.0,
+      "slow_burn_rate": 8.0,
+      "fast_page_budget_percent": 2.0,
+      "slow_page_budget_percent": 5.0
+    },
+    "timeline": [
+      {
+        "phase": "Generate",
+        "detail": "Run 1,440 loopback HTTP batches; execute 1.44 million deterministic operations."
+      },
+      {
+        "phase": "Evaluate",
+        "detail": "Apply 5m/1h fast and 30m/6h slow burn-rate pairs on controlled event time."
+      },
+      {
+        "phase": "Decide",
+        "detail": "Write evaluated windows and preserve missing-data/no-traffic states."
+      }
+    ],
+    "scenarios": [
+      "brief_spike",
+      "sustained_failure",
+      "slow_burn",
+      "recovery",
+      "no_traffic",
+      "absent_data",
+      "late_data"
+    ],
+    "run_id": "b59396378fae",
+    "executed_at": "2026-10-18T22:24:34.238653+00:00",
+    "duration_seconds": 1.1742,
+    "artifact_path": "04/b59396378fae"
+  },
+  {
+    "id": "05",
+    "title": "Shared Platform Protection",
+    "summary": "Authenticated tenant identity, quotas, bounded queues, concurrency limits, and weighted dispatch protect shared query capacity.",
+    "checks": [
+      {
+        "name": "unauthenticated_request",
+        "passed": true,
+        "detail": "HTTP 401"
+      },
+      {
+        "name": "trusted_tenant_identity",
+        "passed": true,
+        "detail": "forged X-Tenant=beta resolved to alpha"
+      },
+      {
+        "name": "oversized_query",
+        "passed": true,
+        "detail": "513-byte query returned HTTP 413"
+      },
+      {
+        "name": "noisy_tenant_quota",
+        "passed": true,
+        "detail": "{200: 7, 429: 33}"
+      },
+      {
+        "name": "healthy_tenants_isolated",
+        "passed": true,
+        "detail": "beta {200: 6}; gamma {200: 6}"
+      },
+      {
+        "name": "query_concurrency_bounded",
+        "passed": true,
+        "detail": "{'alpha': 2, 'beta': 2, 'gamma': 2}"
+      },
+      {
+        "name": "weighted_dispatch_fairness",
+        "passed": true,
+        "detail": "first 30 backlogged dispatches: {'alpha': 20, 'beta': 10}"
+      },
+      {
+        "name": "bounded_per_tenant_queue",
+        "passed": true,
+        "detail": "Second pending job rejected at capacity one"
+      }
+    ],
+    "measurements": {
+      "requests": 55,
+      "noisy_rejections": 33,
+      "healthy_completions": 12,
+      "weighted_alpha_dispatches": 20,
+      "weighted_beta_dispatches": 10,
+      "max_per_tenant_concurrency": 2,
+      "healthy_max_latency_ms": 95.76
+    },
+    "timeline": [
+      {
+        "phase": "Identify",
+        "detail": "Resolve fixture bearer tokens to trusted tenant identities."
+      },
+      {
+        "phase": "Admit",
+        "detail": "Bound request bytes, tokens, and pending work per tenant."
+      },
+      {
+        "phase": "Schedule",
+        "detail": "Dispatch with weights and separate active-query limits; measure healthy tenant completion."
+      }
+    ],
+    "scenarios": [
+      "unauthenticated_request",
+      "trusted_tenant_identity",
+      "oversized_query",
+      "noisy_tenant_quota",
+      "healthy_tenants_isolated",
+      "query_concurrency_bounded",
+      "weighted_dispatch_fairness",
+      "bounded_per_tenant_queue"
+    ],
+    "run_id": "108304560876",
+    "executed_at": "2026-10-18T22:24:34.817805+00:00",
+    "duration_seconds": 0.5749,
+    "artifact_path": "05/108304560876"
+  },
+  {
+    "id": "06",
+    "title": "Performance Troubleshooter",
+    "summary": "Propagate request context across HTTP, compare head and completed-trace tail policies, and use cProfile to explain CPU time.",
+    "checks": [
+      {
+        "name": "real_http_frontend_and_dependency",
+        "passed": true,
+        "detail": "12 frontend and 12 dependency requests; one injected HTTP 503"
+      },
+      {
+        "name": "parent_child_context_propagation",
+        "passed": true,
+        "detail": "48 spans linked across two threaded HTTP services"
+      },
+      {
+        "name": "rare_error_sampling_tradeoff",
+        "passed": true,
+        "detail": "Fixture head policy drops rare error trace; completed-trace tail policy retains it"
+      },
+      {
+        "name": "slow_dependency_retained",
+        "passed": true,
+        "detail": "Slow trace duration 45.35ms"
+      },
+      {
+        "name": "profile_identifies_cpu_function",
+        "passed": true,
+        "detail": "cProfile measured five cpu_hotspot calls; .pstats and ranked text saved"
+      },
+      {
+        "name": "instrumentation_overhead_measured",
+        "passed": true,
+        "detail": "median delta 17.303\u00b5s over seven alternating rounds"
+      }
+    ],
+    "measurements": {
+      "http_requests": 24,
+      "trace_count": 12,
+      "span_count": 48,
+      "head_retained": 3,
+      "tail_retained": 2,
+      "otel_sdk_enabled": "true",
+      "baseline_median_us": 69.882,
+      "traced_median_us": 87.185,
+      "instrumentation_delta_us": 17.303,
+      "instrumentation_delta_percent": 24.76
+    },
+    "timeline": [
+      {
+        "phase": "Follow",
+        "detail": "W3C context crosses frontend, client, and dependency spans."
+      },
+      {
+        "phase": "Compare",
+        "detail": "Head decisions see IDs; completed-trace decisions see errors and latency."
+      },
+      {
+        "phase": "Explain",
+        "detail": "Profiles identify Python CPU work; repeated probes measure instrumentation cost."
+      }
+    ],
+    "scenarios": [
+      "real_http_frontend_and_dependency",
+      "parent_child_context_propagation",
+      "rare_error_sampling_tradeoff",
+      "slow_dependency_retained",
+      "profile_identifies_cpu_function",
+      "instrumentation_overhead_measured"
+    ],
+    "run_id": "66b0544d6495",
+    "executed_at": "2026-10-18T22:24:35.422422+00:00",
+    "duration_seconds": 0.6014,
+    "artifact_path": "06/66b0544d6495"
+  },
+  {
+    "id": "07",
+    "title": "Telemetry Cost Optimizer",
+    "summary": "Compare measured bytes with diagnostic coverage before changing retention or sampling.",
+    "checks": [
+      {
+        "name": "Full telemetry finds all injected incidents",
+        "passed": true,
+        "detail": "error-wave, rare-failure, slow-dependency"
+      },
+      {
+        "name": "Minute histograms preserve diagnoses",
+        "passed": true,
+        "detail": "['error-wave', 'rare-failure', 'slow-dependency']"
+      },
+      {
+        "name": "Uniform sampling exposes a rare-event blind spot",
+        "passed": true,
+        "detail": "In this fixed fixture the rare error is not selected; a 10% sample is not an event guarantee."
+      },
+      {
+        "name": "Incident-aware exemplars retain unsampled denominators",
+        "passed": true,
+        "detail": "Metrics are independent from sampled exemplar events."
+      },
+      {
+        "name": "Compatible cumulative histograms merge exactly",
+        "passed": true,
+        "detail": "Sum matching bucket counts; estimate quantiles only after merging."
+      },
+      {
+        "name": "Averaging p95 is caught as unsafe",
+        "passed": true,
+        "detail": "Mean shard p95 605.0 ms vs combined p95 10.0 ms."
+      },
+      {
+        "name": "Policy reduces measured bytes",
+        "passed": true,
+        "detail": "561 vs 79102 gzip bytes"
+      }
+    ],
+    "measurements": {
+      "requests": 3000,
+      "baseline_gzip_bytes": 79102,
+      "aggregate_gzip_bytes": 561,
+      "mean_shard_p95_ms": 605.0,
+      "correct_combined_p95_ms": 10.0,
+      "execution_seconds": 0.065
+    },
+    "timeline": [
+      {
+        "phase": "Traffic",
+        "detail": "3,000 requests cross normal, error, slow, and rare-failure periods."
+      },
+      {
+        "phase": "Budget choices",
+        "detail": "Five actual transformations write gzip artifacts."
+      },
+      {
+        "phase": "Replay diagnoses",
+        "detail": "The same rules examine each retained representation."
+      },
+      {
+        "phase": "Decision",
+        "detail": "Keep unsampled metrics; sample detail with explicit coverage trade-offs."
+      }
+    ],
+    "scenarios": [
+      "Normal traffic",
+      "Sustained errors",
+      "Slow dependency",
+      "Rare failure",
+      "Uniform event sampling",
+      "Incident-aware exemplar sampling",
+      "Minute and five-minute aggregation",
+      "Unsafe quantile averaging",
+      "Measured gzip size and explicit pricing assumptions"
+    ],
+    "run_id": "3a26da2e3240",
+    "executed_at": "2026-10-18T22:24:35.491730+00:00",
+    "duration_seconds": 0.0663,
+    "artifact_path": "07/3a26da2e3240"
+  },
+  {
+    "id": "08",
+    "title": "AI Incident Investigator",
+    "summary": "Retrieve evidence, compare hypotheses, and abstain before making unsupported claims.",
+    "checks": [
+      {
+        "name": "Known incident retrieves supporting sources",
+        "passed": true,
+        "detail": "['E02', 'E01', 'E05']"
+      },
+      {
+        "name": "Missing observations cause abstention",
+        "passed": true,
+        "detail": "collect more evidence"
+      },
+      {
+        "name": "Conflicting observations cause abstention",
+        "passed": true,
+        "detail": "Conflicting direct probe blocks a definitive conclusion."
+      },
+      {
+        "name": "Prompt injection cannot change baseline decision",
+        "passed": true,
+        "detail": "The untrusted request payload remains evidence text."
+      },
+      {
+        "name": "Unsafe recommendations are rejected",
+        "passed": true,
+        "detail": "delete database was rejected by the schema/action gate."
+      },
+      {
+        "name": "Invented provenance is rejected",
+        "passed": true,
+        "detail": "NOT-A-SOURCE is not a retrieved evidence ID."
+      },
+      {
+        "name": "Tenant boundary is respected",
+        "passed": true,
+        "detail": "South evidence is excluded from north investigation."
+      }
+    ],
+    "measurements": {
+      "source_records": 7,
+      "retrieved_records": 6,
+      "supported_citations": 3,
+      "abstention_cases": 2,
+      "model_mode": "deterministic evidence baseline",
+      "execution_seconds": 0.0007
+    },
+    "timeline": [
+      {
+        "phase": "Incident arrives",
+        "detail": "Checkout failures are scoped to north and minutes 8\u201312."
+      },
+      {
+        "phase": "Evidence search",
+        "detail": "Metrics, traces, Fluent Bit logs, and deployments compete by retrieval relevance."
+      },
+      {
+        "phase": "Hypothesis review",
+        "detail": "Supporting and contradicting observations receive explicit weights."
+      },
+      {
+        "phase": "Decision gate",
+        "detail": "Provenance and sufficiency checks permit a supported hypothesis or require abstention."
+      }
+    ],
+    "scenarios": [
+      "Known dependency failure",
+      "Missing evidence",
+      "Contradictory probe",
+      "Prompt injection in logs",
+      "Invented citations",
+      "Unsafe recommendation",
+      "Tenant scoping",
+      "Optional real model with fail-closed validation"
+    ],
+    "run_id": "5abf5d03654f",
+    "executed_at": "2026-10-18T22:24:35.495126+00:00",
+    "duration_seconds": 0.0013,
+    "artifact_path": "08/5abf5d03654f"
+  },
+  {
+    "id": "09",
+    "title": "AI Performance Tracker",
+    "summary": "Serve a tiny CPU language model and measure queue delay, first token, token spacing, and useful throughput.",
+    "checks": [
+      {
+        "name": "HTTP delivers a complete incremental token stream",
+        "passed": true,
+        "detail": "NDJSON tokens are read incrementally before the final timing event."
+      },
+      {
+        "name": "Model is trained from the checked-in corpus",
+        "passed": true,
+        "detail": "240 corpus tokens / 140 word vocabulary"
+      },
+      {
+        "name": "Worker limit holds under concurrent requests",
+        "passed": true,
+        "detail": "Observed maximum active inference workers: 2"
+      },
+      {
+        "name": "Queue time and inference time are separately measured",
+        "passed": true,
+        "detail": "Maximum queue wait 0.0473 seconds; no artificial sleeps."
+      },
+      {
+        "name": "Metrics expose completed requests and tokens",
+        "passed": true,
+        "detail": "Prometheus exposition fetched from the running HTTP service."
+      },
+      {
+        "name": "Client and server observe nonzero first-token delay",
+        "passed": true,
+        "detail": "Client timing includes HTTP transport; server timing starts at handler arrival."
+      },
+      {
+        "name": "OpenTelemetry separates queue, prefill and decode spans",
+        "passed": true,
+        "detail": "40 actual SDK spans recorded for ten completed requests."
+      }
+    ],
+    "measurements": {
+      "requests": 10,
+      "generated_tokens": 232,
+      "max_active_workers": 2,
+      "burst_tokens_per_second": 676.081,
+      "max_queue_seconds": 0.047335,
+      "short_prompt_ttft_seconds": 0.010702,
+      "long_prompt_ttft_seconds": 0.036952,
+      "mean_burst_tpot_seconds": 0.001662,
+      "execution_seconds": 0.8563
+    },
+    "timeline": [
+      {
+        "phase": "Request arrives",
+        "detail": "Prompt length and output budget enter a real streaming HTTP endpoint."
+      },
+      {
+        "phase": "Queue",
+        "detail": "Eight clients share two bounded CPU inference workers."
+      },
+      {
+        "phase": "First token",
+        "detail": "Trigram context likelihood is computed and an output token is sampled."
+      },
+      {
+        "phase": "Token stream",
+        "detail": "The client measures time between received output tokens."
+      },
+      {
+        "phase": "Capacity review",
+        "detail": "Compare queue, TTFT, TPOT and output throughput; do not infer GPU behavior."
+      }
+    ],
+    "scenarios": [
+      "Short prompt",
+      "Long prompt",
+      "Sequential requests",
+      "Eight concurrent clients",
+      "Two-worker limit",
+      "Streaming token delivery",
+      "Client/server timing difference",
+      "Prometheus metrics",
+      "Optional Ollama real LLM comparison"
+    ],
+    "run_id": "58a2ad75491c",
+    "executed_at": "2026-10-18T22:24:36.353599+00:00",
+    "duration_seconds": 0.8572,
+    "artifact_path": "09/58a2ad75491c"
+  },
+  {
+    "id": "10",
+    "title": "Service Monitoring Starter Kit",
+    "summary": "Turn an ownership and telemetry contract into a working instrumented Python service with repeatable assets.",
+    "checks": [
+      {
+        "name": "Generated service responds to health and work",
+        "passed": true,
+        "detail": "A generated Python subprocess served real HTTP requests."
+      },
+      {
+        "name": "OpenTelemetry preserves incoming trace context",
+        "passed": true,
+        "detail": "Incoming W3C traceparent matches the exported SERVER span."
+      },
+      {
+        "name": "Failure emits metric and error span",
+        "passed": true,
+        "detail": "GET /work?fail=1 produced status 500 and OpenTelemetry ERROR."
+      },
+      {
+        "name": "Success and failure logs correlate with response and span",
+        "passed": true,
+        "detail": "Parsed service.jsonl records match each /work response trace ID, status and exported server span."
+      },
+      {
+        "name": "Unknown routes use one bounded label",
+        "passed": true,
+        "detail": "Customer-specific path is absent from metric labels."
+      },
+      {
+        "name": "Invalid contracts fail before generating files",
+        "passed": true,
+        "detail": "missing owner, unbounded request label, dynamic path, impossible target"
+      },
+      {
+        "name": "Generation is byte reproducible",
+        "passed": true,
+        "detail": "10 generated files have identical SHA-256 manifests."
+      },
+      {
+        "name": "Dashboard, alerts, Fluent Bit and Docker assets exist",
+        "passed": true,
+        "detail": "Onboarding includes collection and ownership, not only application code."
+      },
+      {
+        "name": "Metrics endpoint exposes histogram samples",
+        "passed": true,
+        "detail": "Fetched live Prometheus exposition from the generated service."
+      }
+    ],
+    "measurements": {
+      "generated_files": 10,
+      "rejected_invalid_contracts": 4,
+      "exported_spans": 6,
+      "http_requests": 5,
+      "json_log_records": 4,
+      "metric_bytes": 8384,
+      "execution_seconds": 0.35
+    },
+    "timeline": [
+      {
+        "phase": "Service owner",
+        "detail": "A small JSON contract declares owner, routes, objectives, and bounded labels."
+      },
+      {
+        "phase": "Generation",
+        "detail": "Python service, Dockerfile, Grafana dashboard, alerts and Fluent Bit configuration appear together."
+      },
+      {
+        "phase": "First request",
+        "detail": "W3C context crosses the HTTP boundary into real OpenTelemetry spans."
+      },
+      {
+        "phase": "First failure",
+        "detail": "An injected 500 appears in metrics, correlated logs, and an ERROR span."
+      },
+      {
+        "phase": "Governance",
+        "detail": "Invalid labels and paths are rejected; deterministic manifests make review easy."
+      }
+    ],
+    "scenarios": [
+      "Contract validation",
+      "Reproducible generation",
+      "Health and work routes",
+      "W3C trace propagation",
+      "Injected 500",
+      "Unknown path cardinality",
+      "Prometheus histogram",
+      "JSON log correlation",
+      "Fluent Bit SQLite WAL and filesystem queue configuration",
+      "Docker and Grafana onboarding assets"
+    ],
+    "run_id": "de2d3faabdcc",
+    "executed_at": "2026-10-18T22:24:36.706230+00:00",
+    "duration_seconds": 0.3508,
+    "artifact_path": "10/de2d3faabdcc"
+  }
+]

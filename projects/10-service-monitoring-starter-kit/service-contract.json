@@ -1,0 +1,9 @@
+{
+  "service_name": "checkout-example",
+  "owner": "platform-team",
+  "contact": "platform@example.test",
+  "routes": ["/health", "/work"],
+  "metric_labels": ["service", "route", "method", "status_code"],
+  "availability_target": 0.99,
+  "latency_target_seconds": 0.25
+}

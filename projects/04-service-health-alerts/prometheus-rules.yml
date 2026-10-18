@@ -1,0 +1,24 @@
+groups:
+  - name: service-health-alerts
+    interval: 15s
+    rules:
+      - record: prep:sli_burn_rate:5m
+        expr: sum by (project) (rate(prep_sli_errors_total{project="04"}[5m])) / sum by (project) (rate(prep_sli_requests_total{project="04"}[5m])) / 0.001
+      - record: prep:sli_burn_rate:30m
+        expr: sum by (project) (rate(prep_sli_errors_total{project="04"}[30m])) / sum by (project) (rate(prep_sli_requests_total{project="04"}[30m])) / 0.001
+      - record: prep:sli_burn_rate:1h
+        expr: sum by (project) (rate(prep_sli_errors_total{project="04"}[1h])) / sum by (project) (rate(prep_sli_requests_total{project="04"}[1h])) / 0.001
+      - record: prep:sli_burn_rate:6h
+        expr: sum by (project) (rate(prep_sli_errors_total{project="04"}[6h])) / sum by (project) (rate(prep_sli_requests_total{project="04"}[6h])) / 0.001
+      - alert: ServiceErrorBudgetBurn
+        expr: (((prep:sli_burn_rate:1h > 14.4) and on (project) (prep:sli_burn_rate:5m > 14.4)) or ((prep:sli_burn_rate:6h > 6) and on (project) (prep:sli_burn_rate:30m > 6))) and on (project) (time() - prep_sli_last_sample_timestamp_seconds{project="04"} <= 120) and on (project) (time() - prep_sli_last_sample_timestamp_seconds{project="04"} >= 0)
+        labels:
+          severity: page
+        annotations:
+          summary: Service error budget is burning rapidly
+      - alert: ServiceTelemetryMissing
+        expr: absent(prep_sli_last_sample_timestamp_seconds{project="04"}) or (time() - prep_sli_last_sample_timestamp_seconds{project="04"} > 120) or (prep_sli_last_sample_timestamp_seconds{project="04"} > time())
+        labels:
+          severity: ticket
+        annotations:
+          summary: Service SLI telemetry is missing or stale

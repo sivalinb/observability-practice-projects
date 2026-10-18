@@ -1,0 +1,102 @@
+[
+  {
+    "project": "01",
+    "source": "Grafana",
+    "dashboard_uid": "prep01",
+    "url": "http://localhost:13000/d/prep01",
+    "file": "projects/01-telemetry-recovery/assets/demo.jpg",
+    "sha256": "16703d7289222338d2e068bf8acbbe88cbe6d11cfeb28cb15c3f790854b12bcf",
+    "captured_at": "2026-10-18T22:29:06.841679+00:00",
+    "report_run_id": "fc11806eb176"
+  },
+  {
+    "project": "02",
+    "source": "Grafana",
+    "dashboard_uid": "prep02",
+    "url": "http://localhost:13000/d/prep02",
+    "file": "projects/02-metric-quality-checker/assets/demo.jpg",
+    "sha256": "8f53e1f6d12131839c121999e12275da0b03aa665d44a8fff1de0ea32fea8ea9",
+    "captured_at": "2026-10-18T22:29:25.903299+00:00",
+    "report_run_id": "59fbad324485"
+  },
+  {
+    "project": "03",
+    "source": "Grafana",
+    "dashboard_uid": "prep03",
+    "url": "http://localhost:13000/d/prep03",
+    "file": "projects/03-telemetry-accuracy-checker/assets/demo.jpg",
+    "sha256": "d366ee3fe946e46eb36c3f3fe6088124897add8f55bfd5b3cb56305060869693",
+    "captured_at": "2026-10-18T22:27:01.858142+00:00",
+    "report_run_id": "dff4ccd10126"
+  },
+  {
+    "project": "04",
+    "source": "Grafana",
+    "dashboard_uid": "prep04",
+    "url": "http://localhost:13000/d/prep04",
+    "file": "projects/04-service-health-alerts/assets/demo.jpg",
+    "sha256": "4c4d25293e02b2d88afeb72e290ab0b4fa39403e51c2e73b1711f08fa17f8c94",
+    "captured_at": "2026-10-18T22:27:14.974617+00:00",
+    "report_run_id": "b59396378fae"
+  },
+  {
+    "project": "05",
+    "source": "Grafana",
+    "dashboard_uid": "prep05",
+    "url": "http://localhost:13000/d/prep05",
+    "file": "projects/05-shared-platform-protection/assets/demo.jpg",
+    "sha256": "acc0c8d1fcf7b3105e1f6132b996f47b9c5bced9fe99ed5303368ba3fab4e45d",
+    "captured_at": "2026-10-18T22:27:31.575019+00:00",
+    "report_run_id": "108304560876"
+  },
+  {
+    "project": "06",
+    "source": "Grafana",
+    "dashboard_uid": "prep06",
+    "url": "http://localhost:13000/d/prep06",
+    "file": "projects/06-performance-troubleshooter/assets/demo.jpg",
+    "sha256": "809e223ebb7ff6612fb2b94a5a998f272844dca9ecc94f432cf4ba9e7752f9ef",
+    "captured_at": "2026-10-18T22:28:06.059826+00:00",
+    "report_run_id": "66b0544d6495"
+  },
+  {
+    "project": "07",
+    "source": "Grafana",
+    "dashboard_uid": "prep07",
+    "url": "http://localhost:13000/d/prep07",
+    "file": "projects/07-telemetry-cost-optimizer/assets/demo.jpg",
+    "sha256": "4636303292f686b523e0596bb8f897599bbb3e76eee895949aa93644d4fe9f1e",
+    "captured_at": "2026-10-18T22:28:12.188414+00:00",
+    "report_run_id": "3a26da2e3240"
+  },
+  {
+    "project": "08",
+    "source": "Grafana",
+    "dashboard_uid": "prep08",
+    "url": "http://localhost:13000/d/prep08",
+    "file": "projects/08-ai-incident-investigator/assets/demo.jpg",
+    "sha256": "c5dbcfcd3ac2a1de8d4871ab3f06b66763a642fc95d137e9cad9211708ba234c",
+    "captured_at": "2026-10-18T22:28:17.508191+00:00",
+    "report_run_id": "5abf5d03654f"
+  },
+  {
+    "project": "09",
+    "source": "Grafana",
+    "dashboard_uid": "prep09",
+    "url": "http://localhost:13000/d/prep09",
+    "file": "projects/09-ai-performance-tracker/assets/demo.jpg",
+    "sha256": "2d263a06180e5d08b520cb56796101138671b07947201e2c3aaff571bb8930c8",
+    "captured_at": "2026-10-18T22:28:24.179180+00:00",
+    "report_run_id": "58a2ad75491c"
+  },
+  {
+    "project": "10",
+    "source": "Grafana",
+    "dashboard_uid": "prep10",
+    "url": "http://localhost:13000/d/prep10",
+    "file": "projects/10-service-monitoring-starter-kit/assets/demo.jpg",
+    "sha256": "ed764d17feaeb673f4e40354b9dccfc9e49b3fc89fc48eec168562076da0aae5",
+    "captured_at": "2026-10-18T22:28:28.998363+00:00",
+    "report_run_id": "de2d3faabdcc"
+  }
+]

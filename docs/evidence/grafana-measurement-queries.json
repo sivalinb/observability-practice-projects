@@ -1,0 +1,1061 @@
+{
+  "recorded_at": "2026-10-18T22:29:49.473300+00:00",
+  "queries": [
+    {
+      "project": "01",
+      "query": "prep_measurement{project=\"01\"}",
+      "response": {
+        "status": "success",
+        "data": {
+          "resultType": "vector",
+          "result": [
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "accepted_events",
+                "project": "01"
+              },
+              "value": [
+                1792362589.447,
+                "25"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "sink_unique_events",
+                "project": "01"
+              },
+              "value": [
+                1792362589.447,
+                "25"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "delivery_attempts",
+                "project": "01"
+              },
+              "value": [
+                1792362589.447,
+                "26"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "duplicates_suppressed",
+                "project": "01"
+              },
+              "value": [
+                1792362589.447,
+                "1"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "wal_bytes",
+                "project": "01"
+              },
+              "value": [
+                1792362589.447,
+                "3485"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "recovery_seconds",
+                "project": "01"
+              },
+              "value": [
+                1792362589.447,
+                "0.069"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "replay_events_per_second",
+                "project": "01"
+              },
+              "value": [
+                1792362589.447,
+                "362.4"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "incomplete_tail_bytes",
+                "project": "01"
+              },
+              "value": [
+                1792362589.447,
+                "20"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "ingress_capacity",
+                "project": "01"
+              },
+              "value": [
+                1792362589.447,
+                "4"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "project": "02",
+      "query": "prep_measurement{project=\"02\"}",
+      "response": {
+        "status": "success",
+        "data": {
+          "resultType": "vector",
+          "result": [
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "before_violations",
+                "project": "02"
+              },
+              "value": [
+                1792362589.452,
+                "11"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "after_violations",
+                "project": "02"
+              },
+              "value": [
+                1792362589.452,
+                "0"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "histogram_series_before",
+                "project": "02"
+              },
+              "value": [
+                1792362589.452,
+                "168"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "histogram_series_after",
+                "project": "02"
+              },
+              "value": [
+                1792362589.452,
+                "14"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "histogram_declared_upper_bound",
+                "project": "02"
+              },
+              "value": [
+                1792362589.452,
+                "126"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "histogram_wire_multiplier",
+                "project": "02"
+              },
+              "value": [
+                1792362589.452,
+                "7"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "project": "03",
+      "query": "prep_measurement{project=\"03\"}",
+      "response": {
+        "status": "success",
+        "data": {
+          "resultType": "vector",
+          "result": [
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "scenarios",
+                "project": "03"
+              },
+              "value": [
+                1792362589.457,
+                "7"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "faults_detected",
+                "project": "03"
+              },
+              "value": [
+                1792362589.457,
+                "6"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "http_ingest_accepts",
+                "project": "03"
+              },
+              "value": [
+                1792362589.457,
+                "36"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "persisted_samples",
+                "project": "03"
+              },
+              "value": [
+                1792362589.457,
+                "35"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "healthy_canary_samples",
+                "project": "03"
+              },
+              "value": [
+                1792362589.457,
+                "6"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "stale_oldest_seconds",
+                "project": "03"
+              },
+              "value": [
+                1792362589.457,
+                "120.008"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "suite_seconds",
+                "project": "03"
+              },
+              "value": [
+                1792362589.457,
+                "0.0699"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "project": "04",
+      "query": "prep_measurement{project=\"04\"}",
+      "response": {
+        "status": "success",
+        "data": {
+          "resultType": "vector",
+          "result": [
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "http_batches",
+                "project": "04"
+              },
+              "value": [
+                1792362589.461,
+                "1440"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "executed_operations",
+                "project": "04"
+              },
+              "value": [
+                1792362589.461,
+                "1440000"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "slo_percent",
+                "project": "04"
+              },
+              "value": [
+                1792362589.461,
+                "99.9"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "fast_burn_rate",
+                "project": "04"
+              },
+              "value": [
+                1792362589.461,
+                "100"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "slow_burn_rate",
+                "project": "04"
+              },
+              "value": [
+                1792362589.461,
+                "8"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "fast_page_budget_percent",
+                "project": "04"
+              },
+              "value": [
+                1792362589.461,
+                "2"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "slow_page_budget_percent",
+                "project": "04"
+              },
+              "value": [
+                1792362589.461,
+                "5"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "project": "05",
+      "query": "prep_measurement{project=\"05\"}",
+      "response": {
+        "status": "success",
+        "data": {
+          "resultType": "vector",
+          "result": [
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "requests",
+                "project": "05"
+              },
+              "value": [
+                1792362589.466,
+                "55"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "noisy_rejections",
+                "project": "05"
+              },
+              "value": [
+                1792362589.466,
+                "33"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "healthy_completions",
+                "project": "05"
+              },
+              "value": [
+                1792362589.466,
+                "12"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "weighted_alpha_dispatches",
+                "project": "05"
+              },
+              "value": [
+                1792362589.466,
+                "20"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "weighted_beta_dispatches",
+                "project": "05"
+              },
+              "value": [
+                1792362589.466,
+                "10"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "max_per_tenant_concurrency",
+                "project": "05"
+              },
+              "value": [
+                1792362589.466,
+                "2"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "healthy_max_latency_ms",
+                "project": "05"
+              },
+              "value": [
+                1792362589.466,
+                "95.76"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "project": "06",
+      "query": "prep_measurement{project=\"06\"}",
+      "response": {
+        "status": "success",
+        "data": {
+          "resultType": "vector",
+          "result": [
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "http_requests",
+                "project": "06"
+              },
+              "value": [
+                1792362589.47,
+                "24"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "trace_count",
+                "project": "06"
+              },
+              "value": [
+                1792362589.47,
+                "12"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "span_count",
+                "project": "06"
+              },
+              "value": [
+                1792362589.47,
+                "48"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "head_retained",
+                "project": "06"
+              },
+              "value": [
+                1792362589.47,
+                "3"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "tail_retained",
+                "project": "06"
+              },
+              "value": [
+                1792362589.47,
+                "2"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "baseline_median_us",
+                "project": "06"
+              },
+              "value": [
+                1792362589.47,
+                "69.882"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "traced_median_us",
+                "project": "06"
+              },
+              "value": [
+                1792362589.47,
+                "87.185"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "instrumentation_delta_us",
+                "project": "06"
+              },
+              "value": [
+                1792362589.47,
+                "17.303"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "instrumentation_delta_percent",
+                "project": "06"
+              },
+              "value": [
+                1792362589.47,
+                "24.76"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "project": "07",
+      "query": "prep_measurement{project=\"07\"}",
+      "response": {
+        "status": "success",
+        "data": {
+          "resultType": "vector",
+          "result": [
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "requests",
+                "project": "07"
+              },
+              "value": [
+                1792362589.474,
+                "3000"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "baseline_gzip_bytes",
+                "project": "07"
+              },
+              "value": [
+                1792362589.474,
+                "79102"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "aggregate_gzip_bytes",
+                "project": "07"
+              },
+              "value": [
+                1792362589.474,
+                "561"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "mean_shard_p95_ms",
+                "project": "07"
+              },
+              "value": [
+                1792362589.474,
+                "605"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "correct_combined_p95_ms",
+                "project": "07"
+              },
+              "value": [
+                1792362589.474,
+                "10"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "execution_seconds",
+                "project": "07"
+              },
+              "value": [
+                1792362589.474,
+                "0.065"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "project": "08",
+      "query": "prep_measurement{project=\"08\"}",
+      "response": {
+        "status": "success",
+        "data": {
+          "resultType": "vector",
+          "result": [
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "source_records",
+                "project": "08"
+              },
+              "value": [
+                1792362589.478,
+                "7"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "retrieved_records",
+                "project": "08"
+              },
+              "value": [
+                1792362589.478,
+                "6"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "supported_citations",
+                "project": "08"
+              },
+              "value": [
+                1792362589.478,
+                "3"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "abstention_cases",
+                "project": "08"
+              },
+              "value": [
+                1792362589.478,
+                "2"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "execution_seconds",
+                "project": "08"
+              },
+              "value": [
+                1792362589.478,
+                "0.0007"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "project": "09",
+      "query": "prep_measurement{project=\"09\"}",
+      "response": {
+        "status": "success",
+        "data": {
+          "resultType": "vector",
+          "result": [
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "requests",
+                "project": "09"
+              },
+              "value": [
+                1792362589.483,
+                "10"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "generated_tokens",
+                "project": "09"
+              },
+              "value": [
+                1792362589.483,
+                "232"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "max_active_workers",
+                "project": "09"
+              },
+              "value": [
+                1792362589.483,
+                "2"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "burst_tokens_per_second",
+                "project": "09"
+              },
+              "value": [
+                1792362589.483,
+                "676.081"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "max_queue_seconds",
+                "project": "09"
+              },
+              "value": [
+                1792362589.483,
+                "0.047335"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "short_prompt_ttft_seconds",
+                "project": "09"
+              },
+              "value": [
+                1792362589.483,
+                "0.010702"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "long_prompt_ttft_seconds",
+                "project": "09"
+              },
+              "value": [
+                1792362589.483,
+                "0.036952"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "mean_burst_tpot_seconds",
+                "project": "09"
+              },
+              "value": [
+                1792362589.483,
+                "0.001662"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "execution_seconds",
+                "project": "09"
+              },
+              "value": [
+                1792362589.483,
+                "0.8563"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "project": "10",
+      "query": "prep_measurement{project=\"10\"}",
+      "response": {
+        "status": "success",
+        "data": {
+          "resultType": "vector",
+          "result": [
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "generated_files",
+                "project": "10"
+              },
+              "value": [
+                1792362589.487,
+                "10"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "rejected_invalid_contracts",
+                "project": "10"
+              },
+              "value": [
+                1792362589.487,
+                "4"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "exported_spans",
+                "project": "10"
+              },
+              "value": [
+                1792362589.487,
+                "6"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "http_requests",
+                "project": "10"
+              },
+              "value": [
+                1792362589.487,
+                "5"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "metric_bytes",
+                "project": "10"
+              },
+              "value": [
+                1792362589.487,
+                "8384"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "execution_seconds",
+                "project": "10"
+              },
+              "value": [
+                1792362589.487,
+                "0.35"
+              ]
+            },
+            {
+              "metric": {
+                "__name__": "prep_measurement",
+                "instance": "prep:8000",
+                "job": "principal-prep",
+                "measurement": "json_log_records",
+                "project": "10"
+              },
+              "value": [
+                1792362589.487,
+                "4"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

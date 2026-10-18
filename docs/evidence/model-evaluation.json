@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-10-18T22:22:30.771451+00:00",
+  "scope": "Actual local Ollama model calls over checked-in synthetic incident evidence; no production data or actions.",
+  "interpretation": "The deterministic evidence gate determines admissible claims. A model interprets the labeled packet; validity is not independent proof of root cause.",
+  "comparison_limit": "Earlier output schemas evolved during implementation. These attempts are observed failure evidence, not a controlled model-size benchmark.",
+  "final_run_constraints": {
+    "source_changes_for_final_attempt": false,
+    "gate_weakened": false,
+    "expected_conclusion_forced": false,
+    "model_answer_rewritten": false,
+    "attempts_for_3b": 1
+  },
+  "software": {
+    "python": "3.12.14",
+    "opentelemetry_sdk": "1.38.0"
+  },
+  "project_source_sha256": "0eadc6b0ec5f83aad80627b2eda3d379465b9716bb07c80475ea920d54f61d49",
+  "fixture_sha256": "114e1ab1084dc94bd1971fb59873fa621b0298624fcb16aa5f6e65f06f6363fd",
+  "earlier_attempts": [
+    {
+      "model": "qwen2.5:0.5b",
+      "configuration": "JSON object output; before explicit schema",
+      "executed_at": "2026-10-18T22:14:48.427248+00:00",
+      "outcome": "rejected",
+      "validation_messages": [
+        "ValueError: Action is outside the read-only recommendation vocabulary"
+      ]
+    },
+    {
+      "model": "qwen2.5:0.5b",
+      "configuration": "Exact vocabulary and citation-sign schema",
+      "executed_at": "2026-10-18T22:16:19.525443+00:00",
+      "outcome": "rejected",
+      "validation_messages": [
+        "ValueError: Conclusion fails evidence sufficiency gate"
+      ]
+    },
+    {
+      "model": "qwen2.5:1.5b",
+      "configuration": "Exact vocabulary and citation-sign schema",
+      "executed_at": "2026-10-18T22:18:36.636516+00:00",
+      "outcome": "rejected",
+      "validation_messages": [
+        "ValueError: Conclusion fails evidence sufficiency gate"
+      ]
+    },
+    {
+      "model": "qwen2.5:1.5b",
+      "configuration": "Status-consistent schema; same semantic gate as final evaluation",
+      "executed_at": "2026-10-18T22:19:24.298068+00:00",
+      "outcome": "rejected",
+      "validation_messages": [
+        "ValueError: Hypothesis evidence references must not be duplicated"
+      ],
+      "rejected_model_output": {
+        "error": "Hypothesis evidence references must not be duplicated",
+        "model_response": {
+          "status": "supported hypothesis",
+          "conclusion": "service saturation",
+          "evidence_ids": [
+            "E03",
+            "E02",
+            "E01"
+          ],
+          "hypotheses": [
+            {
+              "name": "dependency failure",
+              "supporting_evidence": [
+                "E02",
+                "E01"
+              ],
+              "contradicting_evidence": []
+            },
+            {
+              "name": "service saturation",
+              "supporting_evidence": [],
+              "contradicting_evidence": [
+                "E03",
+                "E02",
+                "E03",
+                "E02",
+                "E03"
+              ]
+            },
+            {
+              "name": "bad deployment",
+              "supporting_evidence": [],
+              "contradicting_evidence": []
+            }
+          ],
+          "next_action": "inspect queue and CPU"
+        }
+      }
+    }
+  ],
+  "final_attempt": {
+    "provider": "ollama",
+    "model_identity": {
+      "name": "qwen2.5:3b",
+      "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "bytes": 1929912432,
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen2",
+        "families": [
+          "qwen2"
+        ],
+        "parameter_size": "3.1B",
+        "quantization_level": "Q4_K_M"
+      }
+    },
+    "outcome": "rejected by unchanged validation gate",
+    "report": {
+      "id": "08",
+      "title": "Ai Incident Investigator",
+      "summary": "Execution failed; inspect the failed scenario before trusting this run.",
+      "checks": [
+        {
+          "name": "Project execution completed",
+          "passed": false,
+          "detail": "ValueError: Conclusion omitted required supporting evidence"
+        }
+      ],
+      "measurements": {},
+      "timeline": [
+        {
+          "phase": "Execution failed",
+          "detail": "ValueError"
+        }
+      ],
+      "scenarios": [
+        "Execution failure"
+      ],
+      "run_id": "9dd9b4d59876",
+      "executed_at": "2026-10-18T22:22:30.761472+00:00",
+      "duration_seconds": 41.6491,
+      "artifact_path": "08/9dd9b4d59876"
+    },
+    "validated_model_output": null,
+    "rejection": {
+      "error": "Conclusion omitted required supporting evidence",
+      "model_response": {
+        "status": "supported hypothesis",
+        "conclusion": "dependency failure",
+        "evidence_ids": [
+          "E02",
+          "E01"
+        ],
+        "hypotheses": [
+          {
+            "name": "dependency failure",
+            "supporting_evidence": [
+              "E02",
+              "E01"
+            ],
+            "contradicting_evidence": []
+          },
+          {
+            "name": "service saturation",
+            "supporting_evidence": [],
+            "contradicting_evidence": [
+              "E03"
+            ]
+          },
+          {
+            "name": "bad deployment",
+            "supporting_evidence": [],
+            "contradicting_evidence": [
+              "E04"
+            ]
+          }
+        ],
+        "next_action": "compare deployment timeline"
+      }
+    }
+  }
+}

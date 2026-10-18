@@ -1,0 +1,285 @@
+{
+  "metrics": [
+    {
+      "name": "http_request_duration_seconds",
+      "type": "histogram",
+      "unit": "seconds",
+      "owner": "checkout",
+      "buckets": [
+        0.1,
+        1.0
+      ],
+      "samples": [
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-0"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-1"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-2"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-3"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-4"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-5"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-6"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-7"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-8"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-9"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-10"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-11"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-12"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-13"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-14"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-15"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-16"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-17"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-18"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-19"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-20"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-21"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-22"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200",
+            "user_id": "user-23"
+          },
+          "value": 0.125
+        }
+      ]
+    },
+    {
+      "name": "http_requests_total",
+      "type": "counter",
+      "unit": "milliseconds",
+      "owner": "unknown",
+      "samples": [
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200"
+          },
+          "value": 150
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "500"
+          },
+          "value": 2
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout/123",
+            "extra": "x"
+          },
+          "value": -1
+        }
+      ]
+    },
+    {
+      "name": "legacy_requests_total",
+      "type": "counter",
+      "unit": "requests",
+      "owner": "checkout",
+      "samples": [
+        {
+          "labels": {
+            "service": "checkout"
+          },
+          "value": 8
+        }
+      ]
+    },
+    {
+      "name": "debug_temp",
+      "type": "gauge",
+      "unit": "none",
+      "owner": "unknown",
+      "samples": []
+    }
+  ]
+}

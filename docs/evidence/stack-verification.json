@@ -1,0 +1,65 @@
+{
+  "executed_at": "2026-10-18T22:26:42.934812+00:00",
+  "checks": [
+    {
+      "name": "All ten Python project demos",
+      "passed": true,
+      "detail": "76 measured checks passed"
+    },
+    {
+      "name": "Prometheus scrapes actual project evidence",
+      "passed": true,
+      "detail": "sum(prep_check_result) = 76"
+    },
+    {
+      "name": "OTel metric export reaches Prometheus",
+      "passed": true,
+      "detail": "OTLP check counter is queryable"
+    },
+    {
+      "name": "Wall-clock SLI source is scraped",
+      "passed": true,
+      "detail": "Live counters are separate from accelerated logical-window tests"
+    },
+    {
+      "name": "Fluent Bit tail to Loki query",
+      "passed": true,
+      "detail": "Five unique canary log records arrived through Fluent Bit"
+    },
+    {
+      "name": "OTel trace export to Tempo",
+      "passed": true,
+      "detail": "Two known trace IDs are retrievable from Tempo"
+    },
+    {
+      "name": "All ten projects verified through Grafana data-source proxies",
+      "passed": true,
+      "detail": "Every numeric measurement equals its raw report; latest-run log evidence exists for every scenario"
+    },
+    {
+      "name": "Grafana provisioned data sources and dashboards",
+      "passed": true,
+      "detail": "Three data sources healthy; 11 dashboards"
+    },
+    {
+      "name": "Prometheus rule validation and time-window fixtures",
+      "passed": true,
+      "detail": "Checking /tmp/prometheus-rules.yml\n  SUCCESS: 6 rules found\n\n  SUCCESS"
+    },
+    {
+      "name": "OTel persistent queue survives SIGKILL during backend outage",
+      "passed": true,
+      "detail": "All five accepted traces recovered after Collector kill and Tempo restoration"
+    },
+    {
+      "name": "Fluent Bit filesystem buffer survives SIGKILL during Loki outage",
+      "passed": true,
+      "detail": "All five canary records recovered; duplicates are permitted"
+    },
+    {
+      "name": "Fluent Bit to Kafka and consumer outage replay",
+      "passed": true,
+      "detail": "Five records retained while consumer stopped; Loki received them after restart; committed offset 15 >= 15"
+    }
+  ]
+}

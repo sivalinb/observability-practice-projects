@@ -1,0 +1,58 @@
+{
+  "metrics": [
+    {
+      "name": "http_request_duration_seconds",
+      "type": "histogram",
+      "unit": "seconds",
+      "owner": "checkout",
+      "buckets": [
+        0.1,
+        0.5,
+        1.0,
+        5.0
+      ],
+      "samples": [
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200"
+          },
+          "value": 0.125
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "500"
+          },
+          "value": 1.25
+        }
+      ]
+    },
+    {
+      "name": "http_requests_total",
+      "type": "counter",
+      "unit": "requests",
+      "owner": "checkout",
+      "samples": [
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "200"
+          },
+          "value": 150
+        },
+        {
+          "labels": {
+            "service": "checkout",
+            "route": "/checkout",
+            "status": "500"
+          },
+          "value": 2
+        }
+      ]
+    }
+  ]
+}
