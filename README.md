@@ -12,16 +12,16 @@ Each project includes working code, an illustrated architecture story, a screens
 
 | Project | Build and investigate | Start here |
 | --- | --- | --- |
-| 01 · Telemetry Recovery | fsync WAL, HTTP outage, abrupt restart, replay, acknowledgements and duplicate delivery | [README](projects/01-telemetry-recovery/) |
-| 02 · Metric Quality Checker | Versioned contracts, bounded labels, observed cardinality and histogram expansion | [README](projects/02-metric-quality-checker/) |
-| 03 · Telemetry Accuracy Checker | Known-value canaries, stale or dropped data, wrong labels, incorrect queries and dead-man checks | [README](projects/03-telemetry-accuracy-checker/) |
-| 04 · Service Health Alerts | Error budgets, multiwindow burn rates, missing data and a live wall-clock SLI source | [README](projects/04-service-health-alerts/) |
-| 05 · Shared Platform Protection | Trusted tenant identity, quotas, bounded query queues, concurrency and weighted scheduling | [README](projects/05-shared-platform-protection/) |
-| 06 · Performance Troubleshooter | W3C context propagation, real traces, head/tail retention, CPU profiles and overhead | [README](projects/06-performance-troubleshooter/) |
-| 07 · Telemetry Cost Optimizer | Actual compressed bytes, retention policies, incident replay and preserved diagnostic value | [README](projects/07-telemetry-cost-optimizer/) |
-| 08 · AI Incident Investigator | Evidence retrieval, competing hypotheses, provenance gates, abstention and a local model adapter | [README](projects/08-ai-incident-investigator/) |
-| 09 · AI Performance Tracker | Real CPU token generation over streaming HTTP, queue time, TTFT, TPOT and throughput | [README](projects/09-ai-performance-tracker/) |
-| 10 · Service Monitoring Starter Kit | Generate and run a service with instrumentation, ownership, dashboards, alerts and validation | [README](projects/10-service-monitoring-starter-kit/) |
+| 01 · Telemetry Recovery | fsync WAL, HTTP outage, abrupt restart, replay, acknowledgements and duplicate delivery | [README](projects/01-telemetry-recovery/README.md) |
+| 02 · Metric Quality Checker | Versioned contracts, bounded labels, observed cardinality and histogram expansion | [README](projects/02-metric-quality-checker/README.md) |
+| 03 · Telemetry Accuracy Checker | Known-value canaries, stale or dropped data, wrong labels, incorrect queries and dead-man checks | [README](projects/03-telemetry-accuracy-checker/README.md) |
+| 04 · Service Health Alerts | Error budgets, multiwindow burn rates, missing data and a live wall-clock SLI source | [README](projects/04-service-health-alerts/README.md) |
+| 05 · Shared Platform Protection | Trusted tenant identity, quotas, bounded query queues, concurrency and weighted scheduling | [README](projects/05-shared-platform-protection/README.md) |
+| 06 · Performance Troubleshooter | W3C context propagation, real traces, head/tail retention, CPU profiles and overhead | [README](projects/06-performance-troubleshooter/README.md) |
+| 07 · Telemetry Cost Optimizer | Actual compressed bytes, retention policies, incident replay and preserved diagnostic value | [README](projects/07-telemetry-cost-optimizer/README.md) |
+| 08 · AI Incident Investigator | Evidence retrieval, competing hypotheses, provenance gates, abstention and a local model adapter | [README](projects/08-ai-incident-investigator/README.md) |
+| 09 · AI Performance Tracker | Real CPU token generation over streaming HTTP, queue time, TTFT, TPOT and throughput | [README](projects/09-ai-performance-tracker/README.md) |
+| 10 · Service Monitoring Starter Kit | Generate and run a service with instrumentation, ownership, dashboards, alerts and validation | [README](projects/10-service-monitoring-starter-kit/README.md) |
 
 Suggested sequence: **01 → 03 → 02 → 04 → 05 → 06 → 07 → 08 → 09 → 10**. Each project can also run independently.
 
@@ -58,7 +58,7 @@ Open **http://localhost:17860**, choose any of the ten projects and click **Run 
 
 ## Run the complete telemetry stack
 
-Install and start Docker with Compose (Docker Desktop, or Docker with Colima). Allow approximately 6 GB of container memory and several GB of disk for the core stack. The optional Ollama image/model needs additional disk and memory. Stop the host evidence viewer first so port 8000 is available.
+Install and start Docker with Compose (Docker Desktop, or Docker with Colima). Allow approximately 6 GB of container memory and several GB of disk for the core stack. The optional Ollama image/model needs additional disk and memory. Stop the host evidence viewer first so port 18000 is available.
 
 ```bash
 .venv/bin/python scripts/stack.py up --build -d
